@@ -1,0 +1,58 @@
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Descripci\363n general del sistema}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Estructura}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Funcionamiento}{section.1.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Acerca de este documento}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{Planificaci\363n temporal y econ\363mica}{}% 6
+\BOOKMARK [1][-]{section.2.1}{Planificaci\363n temporal}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Planificaci\363n econ\363mica}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{Entorno de trabajo}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Android}{chapter.3}% 10
+\BOOKMARK [2][-]{subsection.3.1.1}{Sistema operativo}{section.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.1.2}{Aplicaciones}{section.3.1}% 12
+\BOOKMARK [2][-]{subsection.3.1.3}{Intents}{section.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.1.4}{Android Studio}{section.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.1.5}{JDK y SDK}{section.3.1}% 15
+\BOOKMARK [1][-]{section.3.2}{Raspberry Pi}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.2.1}{Caracter\355sticas}{section.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.2.2}{Configuraci\363n}{section.3.2}% 18
+\BOOKMARK [2][-]{subsection.3.2.3}{Pycharm}{section.3.2}% 19
+\BOOKMARK [1][-]{section.3.3}{Circuito de control}{chapter.3}% 20
+\BOOKMARK [2][-]{subsection.3.3.1}{Cerradura}{section.3.3}% 21
+\BOOKMARK [2][-]{subsection.3.3.2}{Rel\351}{section.3.3}% 22
+\BOOKMARK [2][-]{subsection.3.3.3}{Detector PIR}{section.3.3}% 23
+\BOOKMARK [2][-]{subsection.3.3.4}{Placa de pruebas}{section.3.3}% 24
+\BOOKMARK [2][-]{subsection.3.3.5}{Cobbler}{section.3.3}% 25
+\BOOKMARK [2][-]{subsection.3.3.6}{Otros componentes}{section.3.3}% 26
+\BOOKMARK [2][-]{subsection.3.3.7}{Alimentaci\363n el\351ctrica}{section.3.3}% 27
+\BOOKMARK [1][-]{section.3.4}{Documentaci\363n}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.4.1}{Latex}{section.3.4}% 29
+\BOOKMARK [2][-]{subsection.3.4.2}{Referencias}{section.3.4}% 30
+\BOOKMARK [1][-]{section.3.5}{Control de versiones}{chapter.3}% 31
+\BOOKMARK [0][-]{chapter.4}{Integraci\363n}{}% 32
+\BOOKMARK [1][-]{section.4.1}{Modelos dise\361ados}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.1.1}{Aproximaci\363n inicial}{section.4.1}% 34
+\BOOKMARK [2][-]{subsection.4.1.2}{Operaciones de conexi\363n}{section.4.1}% 35
+\BOOKMARK [2][-]{subsection.4.1.3}{Operaciones apertura/cierre}{section.4.1}% 36
+\BOOKMARK [1][-]{section.4.2}{Soluciones inal\341mbricas}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.2.1}{Wi-Fi}{section.4.2}% 38
+\BOOKMARK [2][-]{subsection.4.2.2}{Bluetooth}{section.4.2}% 39
+\BOOKMARK [2][-]{subsection.4.2.3}{Seguridad}{section.4.2}% 40
+\BOOKMARK [2][-]{subsection.4.2.4}{Eficiencia}{section.4.2}% 41
+\BOOKMARK [1][-]{section.4.3}{Aplicaci\363n Slave}{chapter.4}% 42
+\BOOKMARK [2][-]{subsection.4.3.1}{Cuestiones previas}{section.4.3}% 43
+\BOOKMARK [2][-]{subsection.4.3.2}{Punto de acceso}{section.4.3}% 44
+\BOOKMARK [2][-]{subsection.4.3.3}{Inicializaci\363n}{section.4.3}% 45
+\BOOKMARK [2][-]{subsection.4.3.4}{Localizaci\363n}{section.4.3}% 46
+\BOOKMARK [2][-]{subsection.4.3.5}{Gesti\363n de solicitudes}{section.4.3}% 47
+\BOOKMARK [1][-]{section.4.4}{Aplicaci\363n Master}{chapter.4}% 48
+\BOOKMARK [2][-]{subsection.4.4.1}{Cuestiones previas}{section.4.4}% 49
+\BOOKMARK [2][-]{subsection.4.4.2}{ApTools}{section.4.4}% 50
+\BOOKMARK [2][-]{subsection.4.4.3}{Servicios Bluetooth}{section.4.4}% 51
+\BOOKMARK [2][-]{subsection.4.4.4}{Tareas as\355ncronas}{section.4.4}% 52
+\BOOKMARK [2][-]{subsection.4.4.5}{Comunicaci\363n entre actividades}{section.4.4}% 53
+\BOOKMARK [0][-]{chapter.5}{Pruebas y resultados}{}% 54
+\BOOKMARK [0][-]{chapter.6}{Conclusiones y l\355neas futuras}{}% 55
+\BOOKMARK [1][-]{section.6.1}{L\355neas futuras}{chapter.6}% 56
+\BOOKMARK [1][-]{section.6.2}{Conclusiones}{chapter.6}% 57
+\BOOKMARK [0][-]{chapter.7}{Manual usuario}{}% 58

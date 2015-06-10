@@ -1,0 +1,750 @@
+\ifglsentryexists{API}{}%
+{%
+\gls@defglossaryentry{API}%
+{%
+name={API},%
+sort={API},%
+type={main},%
+first={API},%
+firstplural={APIs},%
+text={API},%
+plural={APIs},%
+description={Application Programming Interface. Biblioteca de funciones y procedimientos asociados a una servicio que permite acceder a sus funcionalidades a la vez que proporciona una capa abstracción},%
+descriptionplural={Application Programming Interface. Biblioteca de funciones y procedimientos asociados a una servicio que permite acceder a sus funcionalidades a la vez que proporciona una capa abstracción},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{GPIO}{}%
+{%
+\gls@defglossaryentry{GPIO}%
+{%
+name={GPIO},%
+sort={GPIO},%
+type={main},%
+first={GPIO},%
+firstplural={GPIOs},%
+text={GPIO},%
+plural={GPIOs},%
+description={General Purpose Input/Output). Conjunto de pines programables que representan la interfaz física entre la placa Raspberry Pi y el mundo exterior},%
+descriptionplural={General Purpose Input/Output). Conjunto de pines programables que representan la interfaz física entre la placa Raspberry Pi y el mundo exterior},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{RSSI}{}%
+{%
+\gls@defglossaryentry{RSSI}%
+{%
+name={RSSI},%
+sort={RSSI},%
+type={main},%
+first={RSSI},%
+firstplural={RSSIs},%
+text={RSSI},%
+plural={RSSIs},%
+description={Received Signal Strength Indication. Unidad de medida que indica la potencia de una señal de radio},%
+descriptionplural={Received Signal Strength Indication. Unidad de medida que indica la potencia de una señal de radio},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{UUID}{}%
+{%
+\gls@defglossaryentry{UUID}%
+{%
+name={UUID},%
+sort={UUID},%
+type={main},%
+first={UUID},%
+firstplural={UUIDs},%
+text={UUID},%
+plural={UUIDs},%
+description={Universally Unique Identifier. Número de 16 bits asociado a un servicio Bluetooth que permite identificarlo univocamente},%
+descriptionplural={Universally Unique Identifier. Número de 16 bits asociado a un servicio Bluetooth que permite identificarlo univocamente},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{ADT}{}%
+{%
+\gls@defglossaryentry{ADT}%
+{%
+name={ADT},%
+sort={ADT},%
+type={main},%
+first={ADT},%
+firstplural={ADTs},%
+text={ADT},%
+plural={ADTs},%
+description={Android Development Tools . Complemento para el IDE Eclipse que facilita el desarrollo de aplicaciones Android},%
+descriptionplural={Android Development Tools . Complemento para el IDE Eclipse que facilita el desarrollo de aplicaciones Android},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SDK}{}%
+{%
+\gls@defglossaryentry{SDK}%
+{%
+name={SDK},%
+sort={SDK},%
+type={main},%
+first={SDK},%
+firstplural={SDKs},%
+text={SDK},%
+plural={SDKs},%
+description={Software Development Kit . Conjunto de herramientas que permiten al desarrollador crear aplicaciones para un determinado sistema},%
+descriptionplural={Software Development Kit . Conjunto de herramientas que permiten al desarrollador crear aplicaciones para un determinado sistema},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{PSK}{}%
+{%
+\gls@defglossaryentry{PSK}%
+{%
+name={PSK},%
+sort={PSK},%
+type={main},%
+first={PSK},%
+firstplural={PSKs},%
+text={PSK},%
+plural={PSKs},%
+description={Pre Shared Key, Termino usado en criptografía para referirse a una clave secreta compartida con anterioridad entre las partes a través de un canal seguro},%
+descriptionplural={Pre Shared Key, Termino usado en criptografía para referirse a una clave secreta compartida con anterioridad entre las partes a través de un canal seguro},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SDP}{}%
+{%
+\gls@defglossaryentry{SDP}%
+{%
+name={SDP},%
+sort={SDP},%
+type={main},%
+first={SDP},%
+firstplural={SDPs},%
+text={SDP},%
+plural={SDPs},%
+description={Service Discovery Protocol. Protocolo para la asignación de puertos en tiempo de ejecución para las comunicaciones Bluetooth},%
+descriptionplural={Service Discovery Protocol. Protocolo para la asignación de puertos en tiempo de ejecución para las comunicaciones Bluetooth},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{UDP}{}%
+{%
+\gls@defglossaryentry{UDP}%
+{%
+name={UDP},%
+sort={UDP},%
+type={main},%
+first={UDP},%
+firstplural={UDPs},%
+text={UDP},%
+plural={UDPs},%
+description={User Datagram Protocol. Protocolo para la comunicación en redes definido en el nivel de transporte y basado en el intercambio de datagramas},%
+descriptionplural={User Datagram Protocol. Protocolo para la comunicación en redes definido en el nivel de transporte y basado en el intercambio de datagramas},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{PIR}{}%
+{%
+\gls@defglossaryentry{PIR}%
+{%
+name={PIR},%
+sort={PIR},%
+type={main},%
+first={PIR},%
+firstplural={PIRs},%
+text={PIR},%
+plural={PIRs},%
+description={Passive Infrared . Dispositivo electrónico capaz de medir cambios en la radiación infraroja en su campo de visión empleado comúnmente como sensor de movimiento},%
+descriptionplural={Passive Infrared . Dispositivo electrónico capaz de medir cambios en la radiación infraroja en su campo de visión empleado comúnmente como sensor de movimiento},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{TCP}{}%
+{%
+\gls@defglossaryentry{TCP}%
+{%
+name={TCP},%
+sort={TCP},%
+type={main},%
+first={TCP},%
+firstplural={TCPs},%
+text={TCP},%
+plural={TCPs},%
+description={Transmission Control Protocol . Es uno de los protocolos fundamentales de Internet, se trata de un protocolo orientado a conexión que garantiza la entrega ordenada de la información},%
+descriptionplural={Transmission Control Protocol . Es uno de los protocolos fundamentales de Internet, se trata de un protocolo orientado a conexión que garantiza la entrega ordenada de la información},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{WEP}{}%
+{%
+\gls@defglossaryentry{WEP}%
+{%
+name={WEP},%
+sort={WEP},%
+type={main},%
+first={WEP},%
+firstplural={WEPs},%
+text={WEP},%
+plural={WEPs},%
+description={Wired Equivalent Privacy. Sistema de cifrado incluido inicialmente en el estándar IEEE 802.11 para garantizar la seguridad de las transmisiones inalámbricas},%
+descriptionplural={Wired Equivalent Privacy. Sistema de cifrado incluido inicialmente en el estándar IEEE 802.11 para garantizar la seguridad de las transmisiones inalámbricas},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{MAC}{}%
+{%
+\gls@defglossaryentry{MAC}%
+{%
+name={MAC},%
+sort={MAC},%
+type={main},%
+first={MAC},%
+firstplural={MACs},%
+text={MAC},%
+plural={MACs},%
+description={Media Access Control. Identificador de 48 bit dividido generalmente en 6 bloques hexadecimales asignado por el fabricante a fin de identificar univocamente una tarjeta de red},%
+descriptionplural={Media Access Control. Identificador de 48 bit dividido generalmente en 6 bloques hexadecimales asignado por el fabricante a fin de identificar univocamente una tarjeta de red},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{WPA}{}%
+{%
+\gls@defglossaryentry{WPA}%
+{%
+name={WPA},%
+sort={WPA},%
+type={main},%
+first={WPA},%
+firstplural={WPAs},%
+text={WPA},%
+plural={WPAs},%
+description={Wi-Fi Protected Access. Sistema de cifrado para la protección de redes inalámbricas basado en \Gls {WEP} y diseñado para subsanar las diferencias de este},%
+descriptionplural={Wi-Fi Protected Access. Sistema de cifrado para la protección de redes inalámbricas basado en \Gls {WEP} y diseñado para subsanar las diferencias de este},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{WLAN}{}%
+{%
+\gls@defglossaryentry{WLAN}%
+{%
+name={WLAN},%
+sort={WLAN},%
+type={main},%
+first={WLAN},%
+firstplural={WLANs},%
+text={WLAN},%
+plural={WLANs},%
+description={Wireless Local Area Network. Sistema de comunicación inalámbrico, empleado como alternativa a las redes de área local cableadas o como extensión de éstas. Se basa en el empleo de tecnologías de radiofrecuencia para permitir mayor movilidad a los usuarios},%
+descriptionplural={Wireless Local Area Network. Sistema de comunicación inalámbrico, empleado como alternativa a las redes de área local cableadas o como extensión de éstas. Se basa en el empleo de tecnologías de radiofrecuencia para permitir mayor movilidad a los usuarios},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{OSI}{}%
+{%
+\gls@defglossaryentry{OSI}%
+{%
+name={OSI},%
+sort={OSI},%
+type={main},%
+first={OSI},%
+firstplural={OSIs},%
+text={OSI},%
+plural={OSIs},%
+description={Open System Interconnection. Modelo de red creado en 1980 por la Organización Internacional de Normalización que constituye un marco de referencia para la definición de arquitecturas en la interconexión de los sistemas de comunicaciones},%
+descriptionplural={Open System Interconnection. Modelo de red creado en 1980 por la Organización Internacional de Normalización que constituye un marco de referencia para la definición de arquitecturas en la interconexión de los sistemas de comunicaciones},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{IEEE}{}%
+{%
+\gls@defglossaryentry{IEEE}%
+{%
+name={IEEE},%
+sort={IEEE},%
+type={main},%
+first={IEEE},%
+firstplural={IEEEs},%
+text={IEEE},%
+plural={IEEEs},%
+description={Institute of Electrical and Electronics Engineers. Asociación profesional dedicada a la creación y difusión de estándares en áreas técnicas, especialmente las relacionadas con electrónica, electricidad, informática y telecomunicaciones},%
+descriptionplural={Institute of Electrical and Electronics Engineers. Asociación profesional dedicada a la creación y difusión de estándares en áreas técnicas, especialmente las relacionadas con electrónica, electricidad, informática y telecomunicaciones},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{JIT}{}%
+{%
+\gls@defglossaryentry{JIT}%
+{%
+name={JIT},%
+sort={JIT},%
+type={main},%
+first={JIT},%
+firstplural={JITs},%
+text={JIT},%
+plural={JITs},%
+description={Just in Time. Estrategia para la gestión de los binarios de aplicaciones Android que se basa en una compilación "justo a tiempo", donde la aplicación es compilada en el momento que el usuario decide invocarla},%
+descriptionplural={Just in Time. Estrategia para la gestión de los binarios de aplicaciones Android que se basa en una compilación "justo a tiempo", donde la aplicación es compilada en el momento que el usuario decide invocarla},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{AOT}{}%
+{%
+\gls@defglossaryentry{AOT}%
+{%
+name={AOT},%
+sort={AOT},%
+type={main},%
+first={AOT},%
+firstplural={AOTs},%
+text={AOT},%
+plural={AOTs},%
+description={Ahead of Time. Estrategia para la gestión de los binarios de aplicaciones Android que se basa en una compilación "a priori", compilando la aplicación en el momento de su instalación},%
+descriptionplural={Ahead of Time. Estrategia para la gestión de los binarios de aplicaciones Android que se basa en una compilación "a priori", compilando la aplicación en el momento de su instalación},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{ANT}{}%
+{%
+\gls@defglossaryentry{ANT}%
+{%
+name={ANT},%
+sort={ANT},%
+type={main},%
+first={ANT},%
+firstplural={ANTs},%
+text={ANT},%
+plural={ANTs},%
+description={Herramienta de programación informática para la realización de tareas mecánicas y repetitivas, normalmente durante la fase de compilación y construcción},%
+descriptionplural={Herramienta de programación informática para la realización de tareas mecánicas y repetitivas, normalmente durante la fase de compilación y construcción},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{ARM}{}%
+{%
+\gls@defglossaryentry{ARM}%
+{%
+name={ARM},%
+sort={ARM},%
+type={main},%
+first={ARM},%
+firstplural={ARMs},%
+text={ARM},%
+plural={ARMs},%
+description={Advanced RISC Machine. Arquitectura de ordenadores caracterizada por un juego reducido de instrucciones},%
+descriptionplural={Advanced RISC Machine. Arquitectura de ordenadores caracterizada por un juego reducido de instrucciones},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{JDK}{}%
+{%
+\gls@defglossaryentry{JDK}%
+{%
+name={JDK},%
+sort={JDK},%
+type={main},%
+first={JDK},%
+firstplural={JDKs},%
+text={JDK},%
+plural={JDKs},%
+description={Java Development Kit. Conjunto de herramientas para el desarrollo basado en el lenguaje Java},%
+descriptionplural={Java Development Kit. Conjunto de herramientas para el desarrollo basado en el lenguaje Java},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{IDE}{}%
+{%
+\gls@defglossaryentry{IDE}%
+{%
+name={IDE},%
+sort={IDE},%
+type={main},%
+first={IDE},%
+firstplural={IDEs},%
+text={IDE},%
+plural={IDEs},%
+description={Integrated Development Enviroment. Aplicación que proporciona al desarrollador un conjunto de herramientas para facilitar las labores creación, depuración y prueba del código},%
+descriptionplural={Integrated Development Enviroment. Aplicación que proporciona al desarrollador un conjunto de herramientas para facilitar las labores creación, depuración y prueba del código},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{SSH}{}%
+{%
+\gls@defglossaryentry{SSH}%
+{%
+name={SSH},%
+sort={SSH},%
+type={main},%
+first={SSH},%
+firstplural={SSHs},%
+text={SSH},%
+plural={SSHs},%
+description={Secure Shell. Protocolo empleado para acceder a máquinas remotas de forma segura a través de una red},%
+descriptionplural={Secure Shell. Protocolo empleado para acceder a máquinas remotas de forma segura a través de una red},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{DHCP}{}%
+{%
+\gls@defglossaryentry{DHCP}%
+{%
+name={DHCP},%
+sort={DHCP},%
+type={main},%
+first={DHCP},%
+firstplural={DHCPs},%
+text={DHCP},%
+plural={DHCPs},%
+description={Dynamic Host Configuration Protocol. Protocolo de red que permite a los clientes de una red IP obtener sus parámetros de configuración automáticamente},%
+descriptionplural={Dynamic Host Configuration Protocol. Protocolo de red que permite a los clientes de una red IP obtener sus parámetros de configuración automáticamente},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+}%

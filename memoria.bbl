@@ -1,0 +1,191 @@
+\begin{thebibliography}{10}
+
+\bibitem{Git}
+\href {http://git-scm.com/about} {{About - Git}}.
+
+\bibitem{Activity}
+\href {http://developer.android.com/reference/android/app/Activity.html}
+  {{Activity | Android Developers}}.
+
+\bibitem{Latex}
+\href {http://latex-project.org/intro.html} {{An introduction to LaTeX}}.
+
+\bibitem{MultipleAsyncTask}
+\href
+  {http://stackoverflow.com/questions/4068984/running-multiple-asynctasks-at-the-same-time-not-possible}
+  {{Android - Running multiple AsyncTasks at the same time - Stack Overflow}}.
+
+\bibitem{Android_Studio}
+\href {http://developer.android.com/tools/studio/index.html} {{Android Studio
+  Overview | Android Developers}}.
+
+\bibitem{Android_vs_Eclipse}
+\href
+  {http://academiaandroid.com/android-studio-v1-caracteristicas-comparativa-eclipse/}
+  {{Android Studio v1.0: caracter\'{\i}sticas y comparativa con Eclipse |
+  Academia Android}}.
+
+\bibitem{ART}
+\href {https://source.android.com/devices/tech/dalvik/} {{ART and Dalvik |
+  Android Developers}}.
+
+\bibitem{AsyncTask}
+\href {http://developer.android.com/reference/android/os/AsyncTask.html}
+  {{AsyncTask | Android Developers}}.
+
+\bibitem{Bluetooth_SIG}
+\href {https://www.bluetooth.org/en-us} {{Bluetooth Special Interest Group}}.
+
+\bibitem{BroadcastReceiver}
+\href
+  {http://developer.android.com/reference/android/content/BroadcastReceiver.html}
+  {{BroadcastReceiver | Android Developers}}.
+
+\bibitem{Mendeley}
+\href {https://www.mendeley.com/download-mendeley-desktop/} {{Download Mendeley
+  Desktop - Manage and Share Research Papers | Mendeley}}.
+
+\bibitem{Edimax_driver}
+\href
+  {http://www.edimax.com/edimax/download/download/data/edimax/global/download/for\_home/wireless\_adapters/wireless\_adapters\_n150/ew-7811un}
+  {{EDIMAX Drivers and Downloads- Official Website}}.
+
+\bibitem{edimax}
+\href
+  {http://www.edimax.com/edimax/merchandise/merchandise\_detail/data/edimax/global/wireless\_adapters\_n150/ew-7811un}
+  {{EDIMAX Technology - Official Website - N150 - 150Mbps Wireless
+  IEEE802.11b/g/n nano USB Adapter}}.
+
+\bibitem{Git_docs}
+\href {https://git-scm.com/docs} {{Git - Reference}}.
+
+\bibitem{Bitbucket}
+\href {https://bitbucket.org/} {{Git and Mercurial code management for teams
+  }}.
+
+\bibitem{hostapd}
+\href {https://wireless.wiki.kernel.org/en/users/documentation/hostapd}
+  {{Hostapd - Linux Wireless}}.
+
+\bibitem{IDC}
+\href {http://www.idc.com/prodserv/smartphone-os-market-share.jsp} {{IDC:
+  Smartphone OS Market Share 2014, 2013, 2012, and 2011}}.
+
+\bibitem{Raspbian_install}
+\href
+  {https://www.raspberrypi.org/documentation/installation/installing-images/}
+  {{Installing images - Raspberry Pi Documentation}}.
+
+\bibitem{SDK}
+\href {https://developer.android.com/sdk/installing/index.html?pkg=tools}
+  {{Installing the Android SDK | Android Developers}}.
+
+\bibitem{Intent}
+\href {http://developer.android.com/reference/android/content/Intent.html}
+  {{Intent | Android Developers}}.
+
+\bibitem{JDK}
+\href
+  {http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html}
+  {{Java SE Development Kit 8 - Downloads}}.
+
+\bibitem{OSI}
+{Modelo OSI - Wikipedia.org}.
+
+\bibitem{TCPIP}
+\href {http://es.ia.org/?title=Modelo\_TCP/IP} {{Modelo TCP/IP -Wikipedia}}.
+
+\bibitem{NetworkException}
+\href
+  {http://developer.android.com/reference/android/os/NetworkOnMainThreadException.html}
+  {{NetworkOnMainThreadException | Android Developers}}.
+
+\bibitem{PiWriter}
+\href {http://sourceforge.net/projects/piwriter/} {{PiWriter |
+  SourceForge.net}}.
+
+\bibitem{PIR}
+\href
+  {http://www.tecnoseguro.com/faqs/alarma/que-es-un-detector-de-movimiento-pasivo-o-pir.html}
+  {{Que es un detector de movimiento pasivo o PIR?}}
+
+\bibitem{PiFiller}
+\href {http://ivanx.com/raspberrypi/} {{Raspberry Pi - PiFIller}}.
+
+\bibitem{Raspberry_Broadcom}
+\href
+  {https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2835/README.md}
+  {{Raspberry Pi Broadcom chip}}.
+
+\bibitem{Raspberry_GPIO}
+\href {https://www.raspberrypi.org/documentation/usage/gpio/} {{Raspberry Pi
+  GPIO}}.
+
+\bibitem{Raspberry_SSH}
+\href
+  {https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md}
+  {{Raspberry Pi Passwordless SSH Access}}.
+
+\bibitem{Raspberry_power}
+\href
+  {https://www.raspberrypi.org/documentation/hardware/raspberrypi/power/README.md}
+  {{Raspberry Pi Power}}.
+
+\bibitem{Raspbian_latest}
+\href {http://downloads.raspberrypi.org/raspbian\_latest} {{Raspbian latest -
+  Raspberry Pi Downloads}}.
+
+\bibitem{Pi_distributions}
+\href {http://elinux.org/RPi\_Distributions} {{RPi Distributions -
+  eLinux.org}}.
+
+\bibitem{Raspberry_verified}
+\href {http://elinux.org/RPi\_VerifiedPeripherals} {{RPi VerifiedPeripherals -
+  eLinux.org}}.
+
+\bibitem{Raspberry_Relay}
+\href {http://rsppi.blogspot.com.es/2013/07/control-de-rele-mecanico.html}
+  {{RSPPI - RaSPberry PI: Control de rel\'{e} mec\'{a}nico}}.
+
+\bibitem{WIFI_seguridad}
+\href {http://es.wikipedia.org/wiki/Wifi\#Seguridad\_y\_fiabilidad} {{Seguridad
+  WI-FI - Wikipedia}}.
+
+\bibitem{Tex}
+\href {http://es.wikipedia.org/wiki/TeX} {{Tex - Wikipedia.org}}.
+
+\bibitem{TexLive}
+\href {https://www.tug.org/texlive/} {{TeX Live - TeX Users Group}}.
+
+\bibitem{TexStudio}
+\href {http://texstudio.sourceforge.net/} {{TeXstudio - Sourceforge.net}}.
+
+\bibitem{Raspberry}
+\href {https://www.raspberrypi.org/help/what-is-a-raspberry-pi/} {{What is a
+  Raspberry Pi?}}
+
+\bibitem{Balani}
+Rahul Balani.
+\newblock \href {http://nesl.ee.ucla.edu/document/show/254} {{Energy
+  Consumption Analysis for Bluetooth, WiFi and Cellular Networks}}.
+
+\bibitem{Openhomeautomation}
+Openhomeautomation.net.
+\newblock \href
+  {https://www.openhomeautomation.net/control-a-relay-from-anywhere-using-the-raspberry-pi/}
+  {{Control a Relay From Anywhere Using the Raspberry Pi}}.
+
+\bibitem{Saad2014}
+Chakkor Saad.
+\newblock {Comparative Performance Analysis of Wireless Communication Protocols
+  for Intelligent Sensors and Their Applications}.
+\newblock 5(4):76--85, 2014.
+
+\bibitem{Siebra2012}
+Clauirton~a Siebra, Paulo H~R Costa, Fabio Q~B Silva, Regina C~G Miranda, and
+  Andre L~M Santos.
+\newblock {Energy Management in Wireless Networks from the Mobile Devices
+  Perspective}.
+\newblock (8248):13--16, 2012.
+
+\end{thebibliography}

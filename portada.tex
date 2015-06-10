@@ -1,0 +1,36 @@
+% Portada basada en el ejemplo de:
+% http://en.wikibooks.org/wiki/LaTeX/Title_Creation
+\begin{titlepage}
+\begin{center}
+\begin{minipage}{0.49\linewidth}
+\begin{flushleft}
+\includegraphics[height=1cm]{./images/uvigo_logo}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.49\linewidth}
+\begin{flushright}
+\includegraphics[height=2cm]{./images/escudo_uvigo}
+\end{flushright}
+\end{minipage}
+
+\vspace{2cm}
+
+\begin{color}{darkgrey}
+\large
+Escuela Superior de Ingeniería Informática\\[0.2cm]
+Universidad de Vigo\\[1.9cm]
+\end{color}
+
+% Título del proyecto y titulación
+{\bfseries \titulo}\\[1.5cm]
+\textsc{\large Proyecto Final de Carrera}\\[0.4cm]
+\textcolor{darkgrey}{\large\titulacion}\\[5.0cm]
+
+% Autor, director y fecha
+\begin{flushright} \large
+\emph{Autor:} \autor\\[0.4cm]
+\emph{Director:} \director\\[0.6cm]
+\today
+\end{flushright}
+\end{center}
+\end{titlepage}

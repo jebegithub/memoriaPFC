@@ -1,0 +1,118 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: memoria.aux
+The style file: bibliografia.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: bibliografia.bib
+I was expecting a `,' or a `}'---line 146 of file bibliografia.bib
+ :  
+ :  url = {http://es.wikipedia.org/wiki/Modelo_OSI},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 218 of file bibliografia.bib
+ : @article{TexLive
+ :                 ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in IDC
+Warning--to sort, need author or key in ART
+Warning--to sort, need author or key in Activity
+Warning--to sort, need author or key in Intent
+Warning--to sort, need author or key in Android_Studio
+Warning--to sort, need author or key in Android_vs_Eclipse
+Warning--to sort, need author or key in JDK
+Warning--to sort, need author or key in SDK
+Warning--to sort, need author or key in Raspberry
+Warning--to sort, need author or key in Raspberry_Broadcom
+Warning--to sort, need author or key in Raspberry_verified
+Warning--to sort, need author or key in Raspberry_power
+Warning--to sort, need author or key in Edimax_driver
+Warning--to sort, need author or key in Raspberry_GPIO
+Warning--to sort, need author or key in Pi_distributions
+Warning--to sort, need author or key in Raspbian_install
+Warning--to sort, need author or key in Raspbian_latest
+Warning--to sort, need author or key in PiWriter
+Warning--to sort, need author or key in PiFiller
+Warning--to sort, need author or key in Raspberry_SSH
+Warning--to sort, need author or key in Raspberry_Relay
+Warning--to sort, need author or key in PIR
+Warning--to sort, need author or key in Latex
+Warning--to sort, need author or key in Tex
+Warning--to sort, need author or key in TexLive
+Warning--to sort, need author or key in TexStudio
+Warning--to sort, need author or key in Mendeley
+Warning--to sort, need author or key in Bitbucket
+Warning--to sort, need author or key in Git
+Warning--to sort, need author or key in Git_docs
+Warning--to sort, need author or key in OSI
+Warning--to sort, need author or key in TCPIP
+Warning--to sort, need author or key in Bluetooth_SIG
+Warning--to sort, need author or key in WIFI_seguridad
+Warning--to sort, need author or key in hostapd
+Warning--to sort, need author or key in edimax
+Warning--to sort, need author or key in AsyncTask
+Warning--to sort, need author or key in NetworkException
+Warning--to sort, need author or key in MultipleAsyncTask
+Warning--to sort, need author or key in BroadcastReceiver
+Warning--empty author in OSI
+Warning--empty journal in OSI
+Warning--empty year in OSI
+Warning--empty author in TCPIP
+Warning--empty journal in TCPIP
+Warning--empty year in TCPIP
+Warning--empty author in Raspbian_latest
+Warning--empty journal in Raspbian_latest
+Warning--empty year in Raspbian_latest
+Warning--empty author in WIFI_seguridad
+Warning--empty journal in WIFI_seguridad
+Warning--empty year in WIFI_seguridad
+Warning--empty author in Tex
+Warning--empty journal in Tex
+Warning--empty year in Tex
+Warning--empty journal in Saad2014
+Warning--empty journal in Siebra2012
+Warning--there's a number but no volume in Siebra2012
+You've used 44 entries,
+            2849 wiz_defined-function locations,
+            795 strings with 10374 characters,
+and the built_in function-call counts, 10163 in all, are:
+= -- 817
+> -- 140
+< -- 0
++ -- 60
+- -- 16
+* -- 479
+:= -- 1144
+add.period$ -- 50
+call.type$ -- 44
+change.case$ -- 140
+chr.to.int$ -- 0
+cite$ -- 102
+duplicate$ -- 331
+empty$ -- 1426
+format.name$ -- 16
+if$ -- 2881
+int.to.chr$ -- 0
+int.to.str$ -- 44
+missing$ -- 7
+newline$ -- 141
+num.names$ -- 8
+pop$ -- 352
+preamble$ -- 1
+purify$ -- 96
+quote$ -- 0
+skip$ -- 963
+stack$ -- 0
+substring$ -- 258
+swap$ -- 119
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 176
+warning$ -- 58
+while$ -- 12
+width$ -- 46
+write$ -- 236
+(There were 2 error messages)

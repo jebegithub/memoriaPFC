@@ -1,0 +1,1490 @@
+\documentclass[12pt,a4paper,titlepage,twoside]{report}
+\usepackage[T1]{fontenc}
+\usepackage{eurosym}
+\usepackage[english, spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{glossaries}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{filecontents}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{xcolor}
+\include{settings}
+\makeglossaries
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\nouppercase \rightmark}
+\fancyhead[LO,RE]{\nouppercase \leftmark}
+\fancyfoot[C]{\thepage}
+\newcommand{\titulo}{Gestión de cerraduras eléctricas mediante dispositivos móviles}
+\newcommand{\titulacion}{Ingeniería Informática}
+\newcommand{\autor}{Alfonso José Trigo Raposo}
+\newcommand{\director}{Miguel Ramón Díaz-Cacho Medina}
+\renewcommand{\lstlistlistingname}{Índice de código}
+\renewcommand{\glossaryname }{Índice de código}
+
+\title{\titulo}
+\author{\autor}
+
+
+\begin{document}
+\input{portada}
+\input{glosario}
+
+\tableofcontents
+
+\chapter{Introducción}
+
+\section{Descripción general del sistema}
+
+Resulta sorprendente que un producto tan cotidiano como las llaves haya permanecido casi inmutable ante el avance tecnológico, no existiendo grandes diferencias entre las empleadas en la actualidad y las existentes hace 50 años.\\ 
+Esta resistencia al cambio está motivada por tres razones fundamentalmente:
+
+\begin{itemize}
+	\item \textbf{Seguridad:} La percepción que los usuarios tienen acerca de la seguridad ofrecida por otras soluciones es generalmente inferior a la que asocian a las llaves convencionales. En ocasiones se trata de una percepción objetivamente errónea, sin embargo es un factor determinante para la aceptación de cualquier tecnología.
+	\item \textbf{Coste:} Existen alternativas como las tarjetas magnéticas o la identificación por métodos biométricos cuya seguridad y facilidad de uso son aceptables, pero en ocasiones los costes asociados a su despliegue son elevados. 
+	\item \textbf{Usabilidad:} Dado que la llave es un elemento universal, el perfil de usuarios que la emplean es también universal, por ello el uso de la solución ofrecida debe ser tan simple como sea posible.
+\end{itemize}
+
+El análisis de estos tres factores es el punto de partida del presente proyecto, a través del cual se pretende introducir una solución de uso simple, costes reducidos y seguridad elevada, empleando para ello, una combinación basada en el uso de dispositivos móviles inteligentes y electrónica de bajo coste.\\
+
+La amplia difusión de los teléfonos de tipos \verb|smartphone| y tabletas permite reducir considerablemente los costes del despliegue, puesto que los usuarios pueden emplear dispositivos que ya poseen para usar el sistema sin necesidad de inversiones adicionales. Así mismo, permiten incrementar la seguridad del sistema, puesto que los dispositivos pueden deshabilitados y rastreados en caso de extravío o robo.\\
+
+\subsection{Estructura}
+
+La solución propuesta se divide en tres elementos claramente diferenciados:
+\begin{itemize}
+	\item \textbf{Aplicación Master:} Consiste en una aplicación instalada en un dispositivo móvil inteligente que permite emplearlo a modo de llave, delegando sobre él las funciones de autorización o denegación de la apertura de la cerradura.
+	\item \textbf{Circuito de control:} Se trata de un circuito electrónico que permite operar físicamente la cerradura y que es controlado mediante un ordenador de placa reducida Raspberry Pi.
+	\item \textbf{Aplicación Slave:} Es un programa cuyo objetivo es posible operar el circuito electrónico y gestionar las conexiones con los dispositivos móviles.
+\end{itemize}
+
+\subsection{Funcionamiento}
+
+En el diseño del sistema ha primado la comodidad de los usuarios, de modo que si un dispositivo es configurado para autorizar automáticamente las aperturas, los mecanismos de localización y autorización se llevarán a cabo de modo transparente, ofreciendo a los usuarios la sensación de que la puerta se abre simplemente accionando un pulsador presente en el circuito de control.\\
+Para poder abrir una cerradura, los usuarios deberán contar con un dispositivo móvil que ejecute la aplicación que gestiona las autorizaciones (Master) y haya sido registrado previamente en la aplicación encargada de gestionar la cerradura (Slave).\\
+Cuando el usuario se aproxima a la cerradura portando un dispositivo autorizado, la aplicación Slave emplea una combinación de sensores instalados en el circuito de control para detectarlo y solicitarle que establezca una conexión segura mediante un punto de acceso Wi-Fi asociado a la cerradura.\\
+El circuito instalado en la puerta cuenta con un pulsador mediante el cual los usuarios pueden solicitar su apertura. Cuando una pulsación es registrada, la aplicación Slave comprueba si algún dispositivo autorizado está conectado al punto de acceso, en cuyo caso, le solicita autorización para abrir la cerradura.\\
+Dependiendo de la configuración de la aplicación Master, es posible que esta responda automáticamente autorizando la apertura o bien solicite un código de seguridad al usuario. \\
+Cuando la aplicación Slave recibe la respuesta a su solicitud, si se trata de una autorización, incluirá un campo especificando la duración de la apertura, por lo que el sistema procederá a abrir la cerradura durante el tiempo especificado y notificará el nuevo estado de la cerradura al usuario.\\
+Una vez transcurrido el tiempo autorizado, la cerradura se cierra, y una vez más se notifica su estado al usuario mediante la aplicación Master.
+
+\section{Acerca de este documento}
+
+El presente documento representa la documentación oficial del sistema. Su lectura está recomendada a quien desee comprender a fondo el funcionamiento de sus componentes y especialmente a aquellas personas que pudieran tomar parte en desarrollos futuros.\\
+A continuación se detallan brevemente las secciones que lo conforman junto a una breve descripción del contenido de las mismas:
+
+\begin{itemize}
+	\item \textbf{Descripción general del sistema:} Ofrece una visión global del proyecto, presentando las causas que motivan su desarrollo e introduciendo las soluciones aportadas.
+	
+	\item \textbf{Planificación temporal y económica:} Acorde con la normativa vigente en relación a proyectos de fin de carrera de la Universidad de Vigo, se ha incluido esta sección en la que se detallan las planificaciones asociadas al presente trabajo.
+	
+	\item \textbf{Entorno de trabajo} Aporta una visión detallada de los elementos hardware y software necesarios para el desarrollo justificando su elección.
+	
+	\item \textbf{Integración} Constituye la sección más densa y heterogénea de este documento, su contenido es mayormente técnico, y en ella se justifican las soluciones tecnológicas adoptadas y se detalla el funcionamiento de los principales métodos de las aplicaciones Master y Slave.
+	
+	\item \textbf{Pruebas y resultados} Detalla las pruebas realizadas y los resultados obtenidos.
+	%TODO completar el cuerpo de este item
+	
+	\item \textbf{Conclusiones y líneas futuras:} Recoge un conjunto de funcionalidades cuya importancia o utilidad fueron identificadas durante alguna de las fases del desarrollo. Desde el punto de vista del autor todas ellas aportarían valor añadido al sistema, sin embargo, no han sido incluidas en esta versión por tratarse de características no indispensables cuyo esfuerzo de implementación hubiese requerido un incumplimiento sustancial de la planificación inicial. 
+	\item \textbf{Manual de usuario:} Aunque el carácter de este documento es esencialmente técnico, se ha incluido un capítulo que detalla el funcionamiento del sistema desde el punto de vista del usuario. En el se describen las principales funciones y opciones dejando de lado los aspectos técnicos.
+\end{itemize}
+
+
+\chapter{Planificación temporal y económica}
+%TODO planificaciones
+\section{Planificación temporal}
+\section{Planificación económica}
+
+\chapter{Entorno de trabajo}
+\section{Android}
+Android es una sistema operativo para dispositivos móviles desarrollando inicialmente por Android Inc. con el patrocinio de Google y adquirido por esta en el año 2005. 
+En sus orígenes Android estaba dirigido a teléfonos móviles de tipo smartphone, sin embargo dado su éxito, en la actualidad puede ser encontrado en una amplia gama de dispositivos como tabletas, netbooks, televisores, reproductores mp3 o centros multimedia.
+La portabilidad, flexibilidad y disponibilidad de Android lo han convertido en el sistema operativo predominante en los dispositivos móviles a nivel mundial\cite{IDC} permitiéndole alcanzar en la actualidad cuotas de mercado superiores al 80 \% tal y como representa la figura ~\ref{fig:android_share}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/android_share}
+	\caption{Difusión de sistemas operativos para dispositivos móviles}
+	\label{fig:android_share}
+\end{figure}
+
+\subsection{Sistema operativo}
+Al contrario que otros sistemas operativos para dispositivos móviles como iOS o Windows Phone, Android es un sistema abierto, pudiendo su código fuente ser accedido y modificado. Esta característica le permite estar presente en una gran variedad de hardware puesto que cada compañía es libre de crear su propia versión adaptada a su producto.\\
+
+El sistema está compuesto por un núcleo basado en Linux que se encarga de los servicios esenciales como la seguridad o la gestión de memoria, procesos y controladores. Sobre esta capa se asienta un conjunto librerías esenciales y una máquina virtual capaz de ejecutar programas Java.\\
+La máquina virtual empleada varía en función la versión de Android, empleando Dalvik las versiones iniciales y ART en las más recientes\cite{ART}.\\
+Ambas máquinas virtuales han sido objeto de mejoras continuas. Siendo uno de los cambios más destacables la introducción a partir de Android 5.0 de la compilación \Gls{AOT} (Ahead of Time), donde el binario de las aplicaciones es generado inmediatamente tras su instalación, en contraposición con la estrategia \Gls{JIT} (Just In Time) empleada en versiones anteriores donde las aplicaciones eran compiladas bajo demanda.
+
+Los sistemas Android cuentan con una tercera capa que representa el entorno para las aplicaciones de usuario. Consiste en una serie de recursos que permiten solicitar la ejecución de acciones reservadas al sistema tales como la creación de actividades, la gestión de notificaciones o la invocación del gestor de llamadas. Será en esta última capa donde residirá la aplicación Master diseñada para este proyecto.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./images/Android-System-Architecture}
+	\caption{Arquitectura de un sistema Android}
+	\label{fig:Android-System-Architecture}
+\end{figure}
+
+
+\subsection{Aplicaciones}
+\label{aplicaciones}
+Las aplicaciones Android se desarrollan por lo general en el lenguaje Java, empleando para ello el kit de desarrollo que se introducirá en la sección (ver \ref{JDK y SDK}). \\
+Debido a que las aplicaciones Android son ejecutadas generalmente en dispositivos alimentados mediante baterías, limitar su consumo de recursos debe ser una prioridad para cualquier desarrollo. Dicha limitación es tenida en cuenta por el propio sistema operativo que gestiona rigurosamente la memoria asignada a cada proceso, creando, pausando, restaurando o matando las aplicaciones acorde con las necesidades del sistema.
+
+
+\paragraph{Ciclo de vida}
+\label{lbl:ciclo_vida_android_app}
+Toda aplicación Android está compuesta por un conjunto de actividades ordenadas jerárquicamente, donde cada una de ellas puede ser descrita como una parte funcional del sistema\cite{Activity}.\\
+Debido a la naturaleza limitada de los recursos, un estricto control sobre el consumo de los mismos es llevado a cabo por parte del sistema operativo que gestiona las actividades mediante un algoritmo de pila, de modo que por lo general la actividad situada en la cima de la pila será la única activa y por tanto la que disponga de los recursos del sistema.
+La figura \ref{fig:ciclo_vida_aplicacion_android} muestra el ciclo de vida de toda Android, en el pueden destacarse tres estados clave: \\Diremos una actividad está en ejecución cuando es visible y el usuario puede interactuar con ella, mientras que estará pausada si es visible pero no es posible la interacción. Finalmente, en el momento que una actividad deja de ser visible se puede afirmar que está detenida.\\
+Debido a la estructura jerárquica empleada, cuando una actividad invoca a otra, la primera se pausará para permitir a que la segunda pasar a estado activo, recuperando la primera el foco (y los recursos) una vez la actividad invocada haya concluido.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.65\textwidth]{./images/ciclo_vida_aplicacion_android}
+	\caption{Ciclo vital de una actividad Android}
+	\label{fig:ciclo_vida_aplicacion_android}
+\end{figure}
+
+\subsection{Intents}
+\label{lbl:intents}
+Los Intents constituyen el mecanismo empleado para las comunicar los diferentes componentes de una aplicación Android entre sí y con otras aplicaciones en tiempo de ejecución\cite{Intent}. Se trata de objetos que actúan a modo de mensaje, cuyo encabezado y estructura deben ser conocidos por el destinatario, por ejemplo el siguiente código definiría un nuevo Intent y añadiría a su cuerpo un campo denominado \verb|EXTRA_MESSAGE| para ser leído por el destinatario:
+
+\begin{lstlisting}[language=Java]
+ Intent intent = new Intent(this, DisplayMessageActivity.class);
+ String message = "texto del mensaje"
+ intent.putExtra(EXTRA_MESSAGE, message);
+\end{lstlisting}
+
+Los Intents constituyen un elemento indispensable para iniciar cualquier actividad, ya que toda llamada al método \verb|startActivity()| debe emplear como parámetro un Intent que describa la actividad y proporcione los datos necesarios para su inicialización.\\
+
+Los sistemas Android ofrecen la posibilidad de propagar Intents mediante difusión, de modo que son enviados indiscriminadamente a todas las aplicaciones activas, siendo estas las responsables de decidir si lo consideran relevante o no mediante un conjunto de filtros definidos en el fichero Manifest.xml descrito en la sección \ref{lbl:manifest}.
+Por ejemplo en caso de que el nivel de batería del dispositivo alcanzase un nivel crítico, el sistema podría difundir un mensaje indicando el porcentaje de carga restante, de modo que las aplicaciones que manejasen información volátil, podrían filtrar ese mensaje para proceder al salvado de los datos.
+
+Para recibir un Intent además de establecer el filtro correspondiente, es necesario registrar un \verb|Receiver| que permita capturarlo.\\
+Los Receivers son servicios que permanecen a la escucha esperando la aparición de un determinado Intent, y puesto que existen Intents de difusión, Android también provee un grupo de Receivers denominados \verb|BroadcastReceivers|que escucharan cualquier mensaje propagado por el sistema.
+
+A continuación se muestra el código necesario para el registro de un Receiver asociado a un filtro que discriminará todos los mensajes que no incluyan una acción que indique cambios en el estado de la red.
+
+\begin{lstlisting}[language=Java]
+CustomBroadcastReceiver customBroadcastReceiver;
+customBroadcastReceiver = new CustomBroadcastReceiver(this);
+IntentFilter customIntentFilter = new IntentFilter();
+customIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+registerReceiver(customBroadcastReceiver, customIntentFilter);
+\end{lstlisting}
+
+\subsection{Android Studio}
+Android Studio\cite{Android_Studio} es un entorno de desarrollo multiplataforma escrito en Java que se ha convertido recientemente en el \Gls{IDE} oficial para aplicaciones Android. Creado y mantenido por JetBrains se ha postulado como el reemplazo para la combinación Eclipse + \Gls{ADT} que era la referencia en la documentación oficial con anterioridad\cite{Android_vs_Eclipse}.
+
+Algunas de sus características más reseñables son:
+
+\begin{itemize}
+	\item Ofrece una interfaz específica para el desarrollo en Android
+	\item Integra la herramienta Gradle para la gestión y automatización de la construcción de proyectos
+	\item Permite la importación de proyectos basados en \Gls{ANT}
+	\item Soporta el control de versiones mediante GIT, Subversion o Mercurial
+	\item Comprueba en tiempo real errores sintácticos, compatibilidad o rendimiento
+\end{itemize}
+
+\paragraph*{AVD Manager}
+Para llevar a cabo las pruebas del software desarrollado Android Studio provee a los desarrolladores de una utilidad denominada AVD Manager. Se trata de una herramienta que permite crear y gestionar dispositivos virtuales, pudiendo configurar el harware del dispositivo manualmente o seleccionar alguno de los modelos disponibles.
+Durante el desarrollo sin embargo, la mayor parte de las pruebas se realizaron sobre un dispositivo físico. Puesto que se comprobó que la ejecución de AVD Manager requiere una gran cantidad de recursos, y su rendimiento es por lo general pobre.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/studio-avdmgr-selecthdwr}
+	\caption{Selección del hardware de un dispositivo virtual}
+	\label{fig:studio-avdmgr-selecthdwr}
+\end{figure} 
+
+\subsection{JDK y SDK}
+\label{JDK y SDK}
+Puesto que las aplicaciones serán escritas en lenguaje Java, se requiere la instalación de una versión superior al \Gls{JDK} 6, pudiendo obtenerse la actualización más reciente desde el sitio web \verb|oracle.com|\cite{JDK}. Así mismo, se precisa la instalación del paquete de desarrollo (\Gls{SDK}) proporcionado por Google\cite{SDK}. 
+Las actualizaciones del kit de desarrollo Android están coordinadas con el desarrollo general del sistema. Incorporando, un conjunto de librerías de uso común, un emulador, un depurador de código y una versión actualizada de la documentación oficial para desarrolladores.
+La instalación del SDK se ha facilitado enormemente desde la aparición de Android Studio, puesto que permite acceder a un repositorio con todas las versiones disponibles mediante la utilidad denominada SDK Manager mostrada en la figura \ref{fig:sdk_manager_packages}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/sdk_manager_packages}
+	\caption{SDK Manager en Android Studio}
+	\label{fig:sdk_manager_packages}
+\end{figure}
+
+\section{Raspberry Pi} 
+\label{lbl:Raspberry_Pi}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/raspberry_pi}
+	\caption{Raspberry Pi modelo B+}
+	\label{fig:raspberry_pi}
+\end{figure}
+
+Raspberry Pi es un ordenador de placa única diseñado en el Reino Unido por la fundación Raspberry Pi con el fin de estimular enseñanzas relacionadas con las ciencias de la computación\cite{Raspberry}. Se trata de un dispositivo de coste reducido y gran conectividad. Actualmente es posible adquirir cuatro modelos diferentes (A+, B, B+ Rpi2) cuyos precios oscilan entre 20 y 35 \euro dependiendo de su configuración hardware según se detalla en la siguiente tabla.
+\begin{table}[h]
+	\centering
+	\scriptsize
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		Modelo & Raspberry Pi A+ & Raspberry Pi B & Raspberry Pi B+ & Raspberry Pi 2 \\ \hline
+		\multirow{2}{*}{Chip} & BCM2835 & BCM2835 & BCM2835 & BCM2836\\
+		& (700 MHz) & (700 MHz) & (700 MHz) & (900 MHz) \\
+		\hline
+		Memoria & 256MB & 512 MB & 512 MB & 1GB \\ \hline
+		Almacenamiento	 & Micro SD & SD & Micro SD & Micro SD \\ \hline
+		Red & No & Ethernet & Ethernet & Ethernet \\ \hline
+		GPIO & 26 pins & 26 pins & 40 pins & 40 pins \\ \hline
+		USB & 2 & 2 & 4 & 4 \\ \hline
+		Precio & 19\euro & 26\euro & 30\euro & 35\euro \\ \hline
+	\end{tabular}
+ \caption{Comparativa de los modelos de Raspberry Pi.}
+ \label{tab:raspberry_pi}
+\end{table}
+
+
+\subsection{Características}
+
+\paragraph{Chipset:}
+Todos los modelos de Raspberry Pi están incorporan un chip Broadcom\cite{Raspberry_Broadcom}, siendo un BCM2835 en los modelos más antiguos y BCM2836 en la versión más reciente. Ambos dotados de procesadores \Gls{ARM} con una frecuencias de 700 y 900 Mhz. respectivamente.\par
+
+\paragraph*{Memoria y video}
+
+La memoria disponible en Raspberry Pi es compartida entre la procesador principal y el gráfico, variando su capacidad entre 256 MB en la versión A+ y 1 GB en la segunda generación del modelo B.
+El controlador de video soporta um amplio rango de resoluciones incluyendo HD y FullHD.
+
+\paragraph{Almacenamiento}
+\label{lbl:almacenamiento_raspberry}
+El modelo B de Raspberry emplea como dispositivo de almacenamiento una tarjeta de memoria de tipo SD o SDHC mientras que los modelos A+, B+ y Raspberry Pi 2 utilizan tarjetas de tipo micro SD.
+
+\paragraph{Periféricos}
+\label{lbl:periféricos}
+A la hora de seleccionar los periféricos que se conectaran a la placa es necesario tener en cuenta que debido a la arquitectura empleada, y las restricciones referidas al consumo de energía, el hardware soportado por Raspberry Pi es limitado. Por ello, antes de adquirir nuevo hardware resultará interesante constatar que se encuentra en la lista de dispositivos verificados\cite{Raspberry_verified}.
+
+\textbf{Alimentación:} Raspberry Pi se alimenta mediante una tensión de 5 voltios y un mínimo de 700mA suministrada a través de un puerto micro USB. Dependiendo del uso al que se destine la placa y los periféricos conectados a la misma el consumo puede incrementarse sustancialmente; por tanto seleccionar un adaptador de corriente no es en absoluto una cuestión baladí. Puesto que tal y como se constató durante el desarrollo del presente proyecto, una alimentación deficiente puede ser el origen de múltiples problemas.\\
+Las recomendaciones del fabricante sugieren el uso de un alimentador que provea al menos 1.5A así como el empleo de un Hub USB alimentado si fuese necesario\cite{Raspberry_power}.
+
+\textbf{Wi-Fi:}
+Se ha seleccionado un adaptador inalámbrico USB Edimax EW-7811Un para crear el punto de acceso necesario para el funcionamiento del sistema. Se trata de una tarjeta popular y de bajo coste que figura en la lista de dispositivos verificados.\\
+Como se detallará posteriormente en la sección \ref{lbl:hostapd}, la tarjeta seleccionada se basa en un chip (RTL8188CUS) que no es soportado por la utilidad hostapd presente en el núcleo de Raspbian, sin embargo el fabricante ofrece una versión propia que cubre las necesidades del proyecto\cite{Edimax_driver}.
+
+\textbf{Bluetooth:}
+Se ha empleado un adaptador USB Bluetooth 2.0 genérico reconocido por Raspbian sin necesidad de instalaciones adicionales, su rango de actuación es superior a los 20 metros y la tasa de transferencia de ofrecida llega hasta los 3MB/s.
+
+\paragraph{GPIO}
+\label{sec:GPIO}
+Los \Gls{GPIO} son un conjunto de puertos que funcionan con tensiones de 3,3 o 5v y pueden ser configurados como entradas o salidas. Representan una de las características más interesantes de Raspberry Pi, ya que constituyen la interfaz física entre la placa y el mundo exterior\cite{Raspberry_GPIO}.\\
+Aunque el número de pines varía según la versión empleada (26 en las versiones más antiguas y 40 en las más recientes), la distribución de los 26 primeros se corresponde con la mostrada por la figura \ref{fig:gpio_layout} y es idéntica para todos los modelos con el fin de garantizar que la actualización de la placa sea posible sin requerir cambios en el conexionado a la misma.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/gpio_layout}
+	\caption{Distribución de los 26 primeros puertos GPIO}
+	\label{fig:gpio_layout}
+\end{figure}
+
+\subsection{Configuración}
+
+\paragraph*{Sistema operativo}
+
+De entre la gran variedad de sistemas disponibles para Raspberry Pi\cite{Pi_distributions} se ha seleccionado Raspbian, una distribución Linux basada en Debian Wheezy optimizada para el hardware de la placa que cubre suficientemente los requisitos del proyecto.\\
+Tal y como se menciona en el apartado \ref{lbl:almacenamiento_raspberry}, el dispositivo de almacenamiento permanente empleado por Raspberry Pi es una tarjeta de memoria, por tanto en ella es donde residirá el sistema operativo.\\ 
+Esta sección detallará a continuación los pasos necesarios para la instalación y configuración de Raspbian desde MacOS, siendo posible obtener las instrucciones para sistemas Linux y Windows en la documentación oficial\cite{Raspbian_install}.
+
+\subparagraph{Instalación de la imagen} 
+
+La fundación Raspberry Pi ofrece un repositorio desde el que es posible obtener una imagen de la versión más actual de Raspbian\cite{Raspbian_latest}.\\Una vez descargada la imagen esta debe ser grabada en la tarjeta de memoria, existiendo para ello aplicaciones y scripts como PiWriter\cite{PiWriter} o PiFiller\cite{PiFiller}. Aunque este tipo de herramientas permiten agilizar el proceso de copia, se ha constatado que su funcionamiento difiere según la versión del sistema operativo en la que se ejecuten; por ello, este documento detallará las instrucciones necesarias para grabar la imagen mediante el uso exclusivo del terminal.\\
+
+En primer lugar, se debe obtener un listado de los discos presentes en el sistema para determinar el identificador de la partición donde se desea grabar la imagen:
+
+\begin{lstlisting}[language=bash]
+$diskutil list
+\end{lstlisting}
+
+La salida resultante debe ser similar a la mostrada en la figura \ref{fig:disk_util_list}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/disk_util_list}
+	\caption{Listado de los discos disponibles en el sistema}
+	\label{fig:disk_util_list}
+\end{figure}
+
+Donde \verb|/dev/disk2|, con 4GB de espacio de almacenamiento, identifica a la tarjeta de memoria y \verb|/dev/disk2s1| a su primera partición.\\ 
+La partición debe ser desmontada antes de comenzar el proceso de copia a bajo nivel empleando el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+$diskutil unmountDisk /dev/disk2
+\end{lstlisting}
+
+Para iniciar la copia, debe proporcionarse la ruta hacia el fichero .img y el especificar la partición destino:
+
+\begin{lstlisting}[language=bash]
+$sudo dd bs=1m if=2015-02-16-raspbian-wheezy.img of=/dev/disk2
+\end{lstlisting}
+
+La duración del proceso dependerá entre otros factores del tamaño de la imagen y el disco de destino, pudiendo en ocasiones extenderse más allá de un par de horas.\\
+ Aunque el comando no produce salida alguna hasta que el proceso finaliza con éxito o falla, pueden obtenerse estadísticas sobre la cantidad de datos procesados y el tiempo transcurrido presionando la combinación de teclas \verb|comando + T|.
+
+\paragraph*{Acceso SSH}
+Una vez grabada la imagen e introducida la tarjeta en la placa, el sistema operativo se iniciará por primera vez obteniendo una dirección IP mediante \Gls{DHCP} si existe un servidor disponible en la red. A continuación se iniciará un servicio \Gls{SSH} que permitirá acceder al sistema remotamente y cuyos valores iniciales son los siguientes:
+
+\label{valores_defecto_pi}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		Host & raspberrypi \\ \hline
+		Usuario & pi \\ \hline
+		Contraseña & raspberry \\ \hline
+	\end{tabular}
+\end{table}
+
+Suponiendo que el servidor DHCP de la red haya asignado a la Raspberry la IP 192.168.1.131, podría iniciase una sesión SSH ejecutando en terminal el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+$ ssh pi@192.168.1.131
+\end{lstlisting}
+
+Dado que las conexiones a la placa serán frecuentes, resulta interesante incluir un mecanismo que evite la necesidad de introducir la contraseña para cada conexión; para ello, se establecerá una relación de confianza basada en el intercambio de claves RSA entre el equipo empleado y el servidor SSH\cite{Raspberry_SSH}.
+
+En primer lugar, debe crearse un directorio en el equipo local que permita almacenar las claves y asignarle permisos de lectura y escritura para el usuario actual
+
+\begin{lstlisting}[language=bash]
+$ cd ~/
+$ mkdir .ssh ; cd .ssh
+$ chmod go-rwx .ssh
+\end{lstlisting}
+
+Procediendo a continuación a la generación de un par de claves RSA mediante el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+$ ssh-keygen -b 1024 -t rsa -f id_rsa -P ""
+\end{lstlisting}
+
+\begin{figure}
+	\centering
+	\caption[Generación de las claves RSA]{}
+	\label{fig:keygen-generate-ssh-keys}
+\end{figure}
+
+Las claves se almacenarán en el directorio .ssh\ creado previamente bajo los nombres \verb|id_rsa| (privada) y \verb|id_rsa.pub| (pública).\\
+A fin de hacer efectiva la relación de confianza entre ambos equipos, debe añadirse el contenido del fichero que almacena la clave pública al fichero \verb|authorized_keys| situando en el directorio .ssh/ del servidor.
+
+\paragraph*{Configuración básica}
+Una vez iniciado Raspbian, es posible establecer la configuración básica del sistema mediante el siguiente comando: 
+
+\begin{lstlisting}[language=bash]
+$sudo raspi-config
+\end{lstlisting}
+
+Su ejecución lanzará el asistente mostrado en la figura \ref{fig:raspi_config} y cuyas opciones más relvantes son las siguientes:
+
+\begin{itemize}
+\item \textbf{expand\_rootfs}: Debido a que las imágenes de Raspbian corresponden normalmente a un sistema instalado en un disco de 2GB, es recomendable emplear esta opción para expandir el sistema instalado de modo que ocupe la totalidad del espacio disponible en la partición.
+\item \textbf{change\_pass}: Permite cambiar la contraseña para el usuario predeterminado.
+\item \textbf{configure\_keyboard}: Ofrece la posibilidad de seleccionar una distribución alternativa al teclado americano configurado por defecto.
+\item \textbf{change\_timezone} Permite establecer la zona horaria, sin embargo, dado que Raspberry no dispone de un reloj de tiempo real, el ajuste se perderá cada vez que la máquina se reinicie. Ajustándose posteriormente a la hora proporcionada por la red si la placa dispone de conexión a Internet.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/raspi_config}
+	\caption{Acceso a la configuración básica de Raspbian}
+	\label{fig:raspi_config}
+\end{figure}
+
+
+\paragraph*{Actualización}
+Una vez finalizada la configuración básica es recomendable proceder a realizar una actualización de la caché del repositorio y los paquetes instalados en el sistema, para ello se empleará el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+$sudo apt-get update && sudo apt-get -y upgrade 
+\end{lstlisting}
+
+
+\paragraph*{Configuración de red}
+Como se ha descrito en la sección \ref{lbl:periféricos}, para el desarrollo del proyecto la placa ha sido dotada de un adaptador inalámbrico que deberá ser configurado acorde con las necesidades de la aplicación Slave.\\
+El funcionamiento del sistema requiere que la interfaz inalámbrica integre un servidor \gls{DHCP} y funcione como un punto de acceso, motivos por los que será dotada de una dirección IP de tipo estático, habiendo seleccionado para ello el rango de direcciones 10.0.0.X.
+
+Para establecer la configuración, se debe editar el fichero de Raspbian \verb|/etc/network/interfaces| reemplazando su contenido por el siguiente:
+
+\begin{lstlisting}[language=bash]
+auto lo
+iface lo inet loopback
+iface eth0 inet dhcp
+allow-hotplug wlan0
+iface wlan0 inet static
+address 10.0.0.1
+netmask 255.255.255.0
+\end{lstlisting}
+
+\subsection{Pycharm}
+
+Debido a su curva de aprendizaje moderada y abundante documentación en linea, se optó por emplear la versión 2.6 de Python para el desarrollo del proyecto. Se trata de un potente lenguaje multiparadigma e interpretado cuya sintaxis admite pocas ambigüedades, lo que resulta una mayor legibilidad del código y menor número de errores.\\
+
+El \Gls{IDE} seleccionado ha sido PyCharm, un moderno entorno multiplataforma basado en IntelliJ IDEA que ha sido desarrollado por la compañía JetBrains y cuyas principales características se listan a continuación:
+
+\begin{itemize}
+	\item Análisis de código en tiempo real
+	\item Resaltado de sintaxis
+	\item Debugger gráfico
+	\item Soporte para el control de versiones
+	\item Configuración de intérpretes remotos\footnote{La configuración de interpretes remotos sólo esta disponible en la versión Professional de PyCharm}
+\end{itemize}
+
+\paragraph*{Obtener Pycharm}
+JetBrains distribuye una versión gratuita del entorno denominada \verb|Community|, que aunque cubre la mayoría de las necesidades del proyecto, no ofrece la posibilidad de configurar un intérprete remoto. Dicha opción, que si se encuentra presente en la versión \verb|Professional|, se ha considerado relevante para el desarrollo, por lo que se ha solicitado a JetBrains la concesión de una licencia académica gratuita.
+
+\paragraph*{Interprete remoto}
+
+Mediante un intérprete remoto, es posible analizar y depurar el código empleando los módulos de Python instalados sobre la placa Raspberry Pi mientras se ejecuta PyCharm en un ordenador de mayores prestaciones. De este modo el IDE se ejecutará con fluidez y se evitaran posibles incompatibilidades a la hora de desplegar la aplicación en la placa. 
+Para realizar la configuración, la placa Raspberry Pi debe ser accesible a través \Gls{SSH} y su intérprete añadido mediante el subapartado "Interprete del proyecto" situado en el menú de ajustes de PyCharm tal y como muestra la figura \ref{fig:interprete_remoto}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/interprete_remoto}
+	\caption{Configuración de un intérprete remoto en PyCharm}
+	\label{fig:interprete_remoto}
+\end{figure}
+
+\section{Circuito de control}
+
+El proyecto ha requerido la creación del prototipo mostrado en la figura \ref{fig:prototipo} para permitir a la aplicación Slave operar la cerradura y facilitar a los usuarios la interacción con el sistema.\\Los componentes que lo conforman son detallados en esta sección, exponiendo sus características y justificando su idoneidad.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/circuito}
+	\caption{Prototipo del circuito que controla la cerradura}
+	\label{fig:prototipo}
+\end{figure}
+
+\subsection{Cerradura} Las cerraduras eléctricas pueden ser agrupadas en dos grandes grupos atendiendo al estado en el que permanecen en ausencia de tensión de entrada: 
+\begin{itemize}
+	\item normalmente abiertas
+	\item normalmente cerradas
+\end{itemize}
+Se ha optado por una cerradura de tipo \verb|normalmente cerrada| accionable mediante 12v, por ello, si el sistema fuese empleado en una puerta por la que se prevé el paso de personas, sería aconsejable la instalación de algún sistema de emergencia (barra anti-pánico o similar) que permita abrirla en el caso de un corte de suministro eléctrico, avería o cualquier otra eventualidad. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{./images/electric_bolt}
+	\caption{Cerradura eléctrica de tipo "normalmente cerrado"}
+\end{figure}
+
+Durante el desarrollo del proyecto se ha comprobado que accionar la cerradura durante un tiempo prolongado provoca el sobrecalentamiento de la misma, por ello, aunque no formaba parte de las especificaciones iniciales se decidió establecer un tiempo máximo de apertura configurable por el usuario dentro de unos límites establecidos por la aplicación.
+
+
+\subsection{Relé} Un relé es un dispositivo electromecánico que funciona a modo de interruptor, estando generalmente controlado por una entrada de bajo voltaje que permite conmutar un circuito con una tensión superior.\\ 
+Para este proyecto se ha empleado un relé alimentado con 5 voltios que permite gestionar el circuito que provee corriente a la cerradura (12 voltios)
+
+Debido a que tal como se describe en la sección \ref{sec:GPIO}, las salidas de control presentes en la placa Raspberry Pi ofrecen un voltaje y amperaje reducidos, no es posible operar el relé directamente a través de los GPIO, sino que es necesario valerse de un circuito\cite{Openhomeautomation} que además proteja a la placa de posibles sobretensiones mediante el uso de un opto-acoplador.
+El circuito diseñado para tal fin responde al esquema mostrado en la figura \ref{fig:Relay_schem_small}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{./images/Relay_schem_small}
+	\caption{Esquema de un relé opto-acoplado}
+	\label{fig:Relay_schem_small}
+\end{figure}
+
+El opto-acoplador representado en el esquema anterior mediante el símbolo {\includegraphics[scale=0.2]{./images/optocoupler}}, es un componente que permite realizar un enlace óptico entre dos circuitos con tensiones dispares, permitiendo controlar el circuito de voltaje mayor a la vez que garantiza el aislamiento del de menor tensión.\\
+Actualmente es posible adquirir a muy coste placas como la mostrada en la figura \ref{fig:optocoupled_relay}, que incluyen conjuntamente el circuito opto-aislante y el relé, evitando así la necesidad de construir el circuito\cite{Raspberry_Relay} manualmente.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{./images/optocoupled_relay}
+	\caption{Relé opto-aislante comercial}
+	\label{fig:optocoupled_relay}
+\end{figure}
+
+
+\subsection{Detector PIR} 
+\label{lbl:PIR}
+Más conocidos como detectores volumétricos o detectores por infrarrojos, los PIR (Passive Infrared) generan una salida positiva ante la presencia de objetos con un temperatura sensiblemente diferente a la del ambiente\cite{PIR}. \\
+Se trata de un sensor económico y con muy bajo consumo eléctrico, pero su fiabilidad es moderada, puesto que cambios bruscos en la temperatura ambiente, como los provocados por corrientes de aire, pueden generar falsos positivos. Así mismo, su eficacia disminuye conforme la temperatura ambiente se aproxima a la del cuerpo humano, por ello, para obtener resultados más significativos sería recomendable su combinación con sensores secundarios (por ejemplo ultrasonidos) que puedan corroborar los positivos generados, tal y como se propone en la sección \ref{lbl:lineas_futuras}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{./images/detector_pir}
+	\caption{Detector pasivo por infrarrojos}
+	\label{fig:detector_pir}
+\end{figure}
+
+\subsection{Placa de pruebas} 
+La placa de pruebas, conocida como \textit{breadboard}, consiste en un tablero con orificios conectados eléctricamente entre sí siguiendo patrones de líneas.\\
+Su uso facilita el ensamblaje de prototipos electrónicos, ya que permite conectar sus componentes sin necesidad de realizar soldaduras, de modo que es posible alterar la disposición del prototipo con un esfuerzo mínimo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{./images/breadboard}
+\caption{Placa de pruebas empleada en el prototipo}
+\label{fig:breadboard}
+\end{figure}
+
+\subsection{Cobbler} 
+Conectar la Raspberry físicamente a todos los sensores y actuadores del circuito y proveer tensión a los componentes que lo requieran, implica establecer un número considerable de conexiones entre la placa y el circuito, lo cuál, no sólo es un proceso tedioso, sino que incrementa la probabilidad de cometer errores que provoquen un mal funcionamiento del prototipo o dañen la placa.\\
+Un Cobbler, tal como se puede apreciar en la figura \ref{fig:cobbler}, está formado por un conjunto de cables que unen los pines GPIO de la Raspberry Pi con un zócalo numerado presente en la placa de pruebas.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{./images/cobbler}
+\caption{Cobbler para el conexionado de Raspberry pi B+}
+\label{fig:cobbler}
+\end{figure}
+
+
+\subsection{Otros componentes}
+El circuito cuenta con una serie de componentes adicionales, como un pulsador que permite solicitar la apertura de la puerta, un interruptor para determinar el estado de la cerradura o un conjunto de leds que informan la apertura y de la correcta inicialización de los servicios necesarios.
+
+
+\subsection{Alimentación eléctrica}
+Debido a su consumo, la cerradura eléctrica debe contar con su propia alimentación, independiente de la del resto del prototipo. Siguiendo las recomendaciones del fabricante, se ha empleado un transformador DC de 12V y 1A.\\
+Por su parte, los componentes del circuito que presentan consumos reducidos, son alimentadas directamente por los puertos GPIO (ver \ref{sec:GPIO}) de la placa Raspberry Pi, la cual, permite suministrar tensiones de 3,3 y 5v siempre que la intensidad demandada sea inferior a 16mA.
+
+\section{Documentación}
+\subsection{Latex}
+Para la redacción del presente documento se ha empleado el sistema de composición de textos \LaTeX \cite{Latex}, cuyo uso es muy común en publicaciones de carácter académico y científico.\\
+\cite{Latex} está conformado por un grupo de macros basadas en un lenguaje de más bajo nivel denominado Tex\cite{Tex}, se caracteriza por ofrecer una alta calidad tipográfica empleando un enfoque sustancialmente diferente al de los procesadores de texto convencionales. Mientras estos emplean una filosofía WYSIWYG (What you see is what you get), durante la redacción de un documento \cite{Latex}, el formateado del mismo se delega en el sistema, permitiendo al autor centrarse únicamente en el contenido.\\
+La creación de un documento requiere la instalación de una distribución basada en Tex y un editor apropiado, siendo la siguiente combinación la empleada en este proyecto:
+
+\begin{itemize}
+\item \textbf{Tex Live:} Es la distribución Tex predeterminada para los principales sistemas operativos basados en Linux. Tanto su versión LiveCD, como los instaladores binarios, pueden ser obtenidos en la web tug.org\cite{TexLive}.
+\item \textbf{TexStudio:} Es un entorno integrado de escritura para la creación de documentos \LaTeX que incorpora funciones de resaltado de sintaxis y auto-completado. Su instalador para los principales sistemas operativos está disponible en la web de descargas sourceforge.net\cite{TexStudio}.
+\end{itemize}
+
+
+\subsection{Referencias}
+Para el mantenimiento de la bibliografía asociada al proyecto, se ha empleado el gestor de referencias \verb|Mendeley|.\\
+Mendeley es una herramienta que facilita el proceso de almacenar, organizar y publicar referencias bibliográficas y cuya aplicación de escritorio puede ser obtenida sin coste en la web mendeley.com\cite{Mendeley}.
+
+
+\section{Control de versiones}
+El empleo de un sistema de control de versiones permite gestionar ágilmente los cambios introducidos en el proyecto, ofreciendo la posibilidad de revertirlos si fuese necesario.\\
+
+Cuando un proyecto es desarrollado en más de una máquina, como ha sido el caso, la implantación de un control de versiones permite mantener ambas ubicaciones actualizadas mediante el empleo de un repositorio común en la red.\\
+
+Existen infinidad de sitios web que permiten crear un repositorio, siendo el servicio \verb|bitbucket.org|\cite{Bitbucket} la opción escogida para el presente trabajo, debido a que ofrece alojamiento privado y gratuito para proyectos con un máximo de seis participantes.
+
+\subsection*{GIT}
+Puesto que la complejidad para controlar las versiones en un proyecto con un único participante es baja, cualquiera de los principales sistemas (Git, Subversion y Mercurial) hubiese sido valido. No obstante, se ha empleado Git debido a que ofrece una herramienta multiplataforma y a que posee carácter descentralizado, de modo que cada uno de los equipos de trabajo posee una copia íntegra del repositorio, permitiendo así realizar consultas o modificaciones aun cuando no es posible acceder a la red.\\
+
+El instalador de Git puede obtenerse en la web git-scm.com\cite{Git} .
+
+\subsection*{Comandos comunes}
+A continuación se detallan los principales comandos empleados:
+
+\begin{itemize}
+\item \textbf{git ini} Crea e inicializa un repositorio en el directorio actual.
+\item \textbf{git clone <url>} Clona un repositorio remoto en el equipo local.
+\item \textbf{git add <ruta>} Añade un fichero o un directorio de manera recursiva.
+\item \textbf{git commit -m } Agrupa y etiqueta los cambios realizados sobre los archivos registrados con git-add.
+\item \textbf{git status} Imprime un reporte del estado actual del árbol de trabajo local.
+\item \textbf{git checkout [rev]} Recupera el proyecto desde una revisión dada.
+\item \textbf{git log} Muestra un histórico de commits.
+\item \textbf{git push} Envía los cambios pendientes al repositorio.
+\item \textbf{git pull} Descarga desde el repositorio los cambios realizados.
+\end{itemize}
+
+La lista mostrada representa una mínima parte de los comandos Git, sin embargo es posible obtener listado más pormenorizado en la documentación oficial\cite{Git_docs}.
+
+\chapter{Integración}
+El presente capítulo esa formado por las secciones más técnicas de la documentación, en ellas se justifican las soluciones tecnológicas adoptadas y se detalla el funcionamiento de los principales métodos de las aplicaciones Master y Slave.
+
+\section{Modelos diseñados}
+\label{lbl:modelos}
+El desarrollo del proyecto ha partido de un modelo simple cuyo objetivo ha sido facilitar el aprendizaje relacionado con las tecnologías empleadas para posteriormente progresar hacia un modelo complejo capaz de dar respuesta a los requisitos del sistema.\\
+El progresivo refinamiento del proyecto se ha realizado de acuerdo a dos objetivos primordiales: por un lado, permitir la autentificación de los dispositivos cuando se encuentran en la inmediaciones de la cerradura y por otro, gestionar la apertura y cierre de la puerta previa autorización por parte de un dispositivo autentificado.\\
+Aunque a continuación se analizan las soluciones implementadas en secciones separadas, dicha separación sólo responde a la necesidad de presentar una explicación más legible, siendo ambas rutinas complementarias y entrelazándose su ejecuciones.
+
+\subsection{Aproximación inicial}
+Con el fin de facilitar el aprendizaje relacionado con el funcionamiento de Raspberry Pi y de sus puertos GPIO (ver \ref{sec:GPIO}), se desarrolló un conjunto de aplicaciones simples, que aunque no tienen relación directa con el objetivo del proyecto, su estudio ha facilitado evoluciones posteriores.\\
+Estas aplicaciones incluyeron inicialmente objetivos simples, como encender un led o recibir una señal de entrada. Posteriormente, se incrementó la complejidad con otros como encender una bombilla empleando un relé o realizar una lectura de la intensidad de luz registrada en el entorno.\\
+
+\subsection{Operaciones de conexión}
+\label{lbl:operaciones_conexion}
+Las operaciones de conexión consisten en un conjunto de rutinas encaminadas a garantizar el establecimiento de una conexión entre las aplicaciones Master y Slave.\\
+La idea base sobre la que gira el desarrollo es la siguiente: El dispositivo móvil debe ser capaz de detectar el punto de acceso creado por la aplicación Slave y proceder a conectarse al mismo de modo transparente al usuario, permitiendo dicha conexión la transmisión segura de las órdenes para operar la cerradura.\\
+Tal y como se detalla en la sección \ref{lbl:soluciones_inalambricas}, se ha optado por establecer la comunicación entre ambas aplicaciones mediante un punto de acceso inalámbrico con encriptación \Gls{WPA}.\\
+A continuación se expone la secuencia seguida para diseñar un algoritmo de conexión óptimo, detallando las fortalezas y debilidades detectadas para cada solución:
+
+\paragraph{Búsqueda exhaustiva}
+\label{lbl:busqueda_exhaustiva}
+Una primera aproximación, representada por la figura \ref{fig:modelo_wifi_1}, consiste en buscar exhaustivamente el punto de acceso (AP) mediante el análisis cíclico de las redes Wi-Fi disponibles por parte del dispositivo móvil.\\
+Después de cada escaneo se analizan los resultados obtenidos y se procede a establecer la conexión o iniciar un nuevo escaneo en caso de que el AP no esté disponible.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{./images/modelo_wifi_1.png}
+\caption{Flujo de la búsqueda exhaustiva del AP}
+\label{fig:modelo_wifi_1}
+\end{figure}
+
+Este enfoque aunque funcional y sencillo, es altamente ineficiente.\\ 
+El proceso de escaneado es muy costoso e implica una ralentización del dispositivo y un alto consumo de batería.\\
+Debido las limitaciones detectadas, el modelo fue descartado y orientó el desarrollo hacia una estrategia que permitiese disminuir la frecuencia con la que se escanea la red sin aumentar sustancialmente el tiempo necesario para detectar el punto de acceso, priorizando para ello los análisis en los momentos donde la probabilidad de que el dispositivo móvil se encuentre en el rango del punto de acceso se eleva.
+
+\paragraph{Búsqueda guiada por giroscopio}
+\label{lbl:busqueda_giroscopio}
+Resulta lógico pensar que si el dispositivo se encuentra en una ubicación determinada y ha realizado un escaneo infructuoso, futuros análisis tienen una alta probabilidad de finalizar con resultado negativo mientras la ubicación no varíe. Por tanto, limitar los escaneos a los momentos en los que el dispositivo se encuentra en movimiento permitirá un mejor aprovechamiento de los recursos disponibles sin que la efectividad del análisis se vea sensiblemente afectada.\\
+Se diseñó un modelo cuyo flujo se corresponde con el detallado en la figura \ref{fig:busqueda_giroscopio}, mediante el cual, se limitaba el análisis de la red a los momentos en los que el giroscopio del dispositivo se mostraba activo.\\
+Se observó que si bien el sistema resultó ser funcional y su consumo de recursos inferior asociado a búsqueda exhaustiva, la alta sensibilidad de los mecanismos giroscópicos provocaba que pequeños movimientos desencadenasen frecuentemente escaneos de la red con baja probabilidad de éxito. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{./images/giroscopio}
+\caption{Flujo asociado a la búsqueda guiada por giroscopio}
+\label{fig:busqueda_giroscopio}
+\end{figure}
+
+\paragraph{Búsqueda guiada por RSSI}
+\label{lbl:busqueda_rssi}
+Descartados los mecanismos de tipo giroscópico debido a su alto consumo de batería y su excesiva sensibilidad, se decidió buscar una solución centrada en identificar desplazamientos del dispositivo móvil en lugar de movimientos.\\
+Aunque inicialmente se consideró emplear la señal obtenida por la antena GPS, esta opción se desechó debido a que su fiabilidad es baja (especialmente en interiores) y su consumo elevado.\\
+
+Un nuevo estudio de las opciones disponibles sugirió la posibilidad de emplear los eventos que alertan de cambios en la potencia de la señal Wi-Fi recibida (\Gls{RSSI}).\\
+Basado en el flujo mostrado por la figura \ref{fig:modelo_wifi_rssi}, se desarrolló un modelo basado en un evento denominado \verb|RSSI_CHANGED_ACTION|, que es propagado por el sistema operativo cuando se produce una variación en la RSSI.\\
+Aunque las variaciones pueden venir dadas por múltiples factores, uno probable consiste en que el usuario haya cambiado su ubicación, por tanto, admitiendo dicho indicador, es posible estimar la posibilidad de que el usuario se esté acercando al punto de acceso gestionado por la aplicación Slave.\\
+Aunque variaciones en el ambiente pueden provocan un decaimiento o aumento de la señal, provocando que el evento sea recibido en ocasiones aún no existiendo movimiento alguno, el enfoque garantiza una alta efectividad y reduce enormemente la frecuencia de las búsquedas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{./images/modelo_wifi_rssi.png}
+	\caption{Flujo asociado a la búsqueda del AP orientada por RSSI}
+	\label{fig:modelo_wifi_rssi}
+\end{figure}
+
+
+\paragraph{Búsqueda guiada por Bluetooth}
+\label{lbl:busqueda_bluetooth}
+
+Aunque el método detallado en \ref{lbl:busqueda_rssi} respondía a la funcionalidad esperada, el consumo de recursos asociado seguía siendo elevado. \\
+Dado que el circuito gestionado por la aplicación Slave presenta menores restricciones relativas al consumo de recursos al encontrarse conectado permanentemente a la red eléctrica, se optó alterar el diseño, delegando sobre la aplicación Slave la responsabilidad de determinar cuándo es posible establecer una conexión y activar los mecanismos para que esta se lleve a cabo.\\
+
+Tal y como se detallará en la sección \ref{lbl:soluciones_inalambricas}, la tecnología Bluetooth comparada con Wi-Fi, presenta un menor alcance, una baja tasa de transferencia de datos y ciertas limitaciones referidas a la seguridad de la comunicación. Pero como contrapartida, su consumo es mucho menor\cite{Balani}.\\
+
+Puesto que la gestión de energía debe ser considerada un factor crítico en el desarrollo de aplicaciones móviles, tal y como se detalla en la sección \ref{aplicaciones}, se optó por diseñar una aproximación basada en una combinación Bluetooth + Wi-Fi, cuyo funcionamiento representa la figura \ref{fig:Secuencia_Bluetooth_Wi-Fi}.
+La solución propuesta permite obtener una comunicación segura cuando sea necesario a la vez que minimiza el consumo de recursos, para ello, el dispositivo móvil se limita a ofrecer un servicio Bluetooth y delega sobre la aplicación Slave la responsabilidad de determinar si el servicio se encuentra en algún momento dentro del rango de su adaptador. Cómo se menciona en la sección \ref{lbl:Bluetooth}, localizar un servicio Bluetooth requiere conocer su identificador \Gls{UUID} y la dirección física del servidor que lo ofrece, por lo que ambos datos deberán ser proporcionados a la aplicación Slave cada vez que se registre un nuevo dispositivo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./images/Secuencia_Bluetooth_WIFI}
+	\caption{Secuencia de registro mediante Bluetooth + Wi-Fi}
+	\label{fig:Secuencia_Bluetooth_Wi-Fi}
+\end{figure}
+
+\paragraph{Búsqueda guiada por PIR + Bluetooth}
+\label{lbl:pir_bluetooth}
+Aunque la solución descrita en el apartado \ref{lbl:busqueda_bluetooth} mostró resultados satisfactorios, el adaptador Bluetooth empleado se mostró inestable tras un funcionamiento prolongado. 
+Si bien parece tratarse de una cuestión exclusivamente hardware, se ha diseñado una mejora del circuito de control encaminada a reducir el tiempo de actividad de la radio Bluetooth, disminuyendo a su vez el consumo de recursos del circuito sin afectar a la efectividad del sistema.\\
+La solución propuesta se aparece representada en la figura \ref{fig:secuencia_autentificacion_wifi_bluetooth_volumetrico}. Su funcionamiento requiere la instalación de un detector volumétrico (descrito sección \ref{lbl:PIR}) para detectar movimientos ocurridos frente a la puerta, de modo que las búsquedas Bluetooth sólo se llevarán a cabo tras una respuesta positiva de este sensor.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./images/secuencia_autentificacion_wifi_bluetooth_volumetrico}
+	\caption{Detección y conexión mediante PIR + Bluetooth + Wi-Fi}
+	\label{fig:secuencia_autentificacion_wifi_bluetooth_volumetrico}
+\end{figure}
+
+\subsection{Operaciones apertura/cierre} 
+
+Análogamente a lo sucedido con las operaciones de autentificación, los procesos que gestionan la apertura/cierre de la cerradura han sido objeto de refinamiento durante el desarrollo del proyecto.
+A continuación se detallan los pasos seguido para llegar al diseño final:
+
+\paragraph{Operaciones guiadas por RSSI}
+\label{lbl:apertura_rssi}
+Inicialmente se diseñó un modelo en el que las operaciones de apertura y cierre estaban basadas en la distancia existente entre dispositivo móvil y el punto de acceso, empleando como indicador de proximidad la potencia de la señal (\Gls{RSSI}) procedente del AP.\\
+El modelo implementado, cuyo funcionamiento describe la figura \ref{fig:diagrama_apertura_rssi}, hacía uso de un valor configurable en la aplicación Master, mediante el que se determinaban los umbrales de apertura y cierre, de modo que cuando el usuario estaba conectado al punto de acceso y sobrepasaba un determinado nivel de intensidad de señal, se suponía su cercanía y se procedía a la apertura. Así mismo, cuando la intensidad de señal caía por debajo del umbral determinado, se consideraba que el usuario se estaba alejando y por tanto se ordenaba la operación de cierre.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./images/secuencia_apertura_rssi}
+	\caption{Apertura de la cerradura basada en RSSI}
+	\label{fig:diagrama_apertura_rssi}
+\end{figure}
+
+Durante las pruebas efectuadas se constató que el funcionamiento de esta solución presentaba las siguientes limitaciones:
+
+\begin{itemize}
+	\item Supone que cada vez que el usuario se acerca a la cerradura su deseo es que esta se abra, lo que podría derivar en aperturas de la puerta no deseadas.
+	\item La potencia de la señal no es un indicador suficientemente fiable, puesto que su valor se ve afectado por diversos elementos del entorno (humo, obstáculos, otras señales...).
+	\item La solicitud de operaciones de cierre es generada por la aplicación Master cuando el dispositivo móvil se está alejando del punto de acceso, siendo posible se desconecte antes de que la orden sea enviada.	
+	\item La intensidad de señal registrada en el dispositivo móvil además de inexacta, no es inmediata, por lo que el usuario podría llegar a la altura de la cerradura y debería esperar hasta que la aplicación Master obtuviese un valor actualizado de RSSI. 
+\end{itemize}
+
+\paragraph{Operaciones guiadas por pulsador}
+\label{lbl:apertura_pulsador}
+Los problemas detectados en el apartado \ref{lbl:apertura_rssi} pueden ser agrupados bajo dos premisas: 
+\begin{itemize}
+	\item Es necesario saber si el usuario se encuentra suficientemente cerca de la cerradura y si su deseo es abrirla.
+	\item El sistema debe garantizar que la cerradura sólo permanece abierta cuando el usuario así lo desea.
+\end{itemize}
+
+Para garantizar el cumplimiento del primer requisito, se propuso la instalación de un pulsador en el circuito de control, de modo que la activación del mismo por parte del usuario garantiza que se encuentra en el entorno de la puerta y que su deseo es abrirla.\\
+En este modelo la apertura sólo se llevara a cabo cuando exista petición explicita, sin embargo, con el fin de evitar demoras en la respuesta del sistema, las operaciones de autentificación y registro se realizaran siempre con anterioridad, independientemente de si el usuario decide o no pulsar el botón.\\
+
+Para dar solución al segundo requisito, se ha optado por incluir un temporizador que determinará la duración de la apertura y cuyo valor será configurable en los ajustes de la aplicación Master.\\
+Cada vez que el dispositivo móvil envíe un mensaje autorizando la apertura adjuntará la duración autorizada, de modo que una vez transcurrido ese tiempo la aplicación Slave será quien ordene el cierre independientemente de la ubicación del usuario.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{./images/secuencia_apertura_pulsador}
+	\caption{Apertura de la cerradura basada en pulsador}
+	\label{fig:secuencia_apertura_pulsador}
+\end{figure}
+
+\paragraph{Doble autentificación}
+\label{lbl:doble_autentificación}
+Con el fin de ofrecer un segundo nivel opcional de seguridad, se ha introducido una característica que permite requerir a los usuarios un código de cuatro dígitos para para activar la cerradura.\\
+La implementación incluida en esta versión inicial, que sigue el flujo mostrado por la figura \ref{fig:secuencia_apertura_codigo}, pretende ser una referencia para desarrollos futuros, por lo que la característica ha sido incluida en las líneas futuras del proyecto detalladas en el apartado \ref{lbl:lineas_futuras} de este documento.\\
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./images/secuencia_apertura_codigo}
+	\caption{Apertura de la cerradura basada en código}
+	\label{fig:secuencia_apertura_codigo}
+\end{figure}
+
+Es importante destacar que el uso de la doble autentificación, si bien incrementa sustancialmente la seguridad, también provoca que el proceso de apertura deje de ser transparente al usuario.
+
+\section{Soluciones inalámbricas}
+
+\label{lbl:soluciones_inalambricas}
+
+En esta sección se detalla la solución inalámbrica adoptada para cubrir los requerimientos de seguridad y eficiencia demandados por el proyecto. Para su diseño se han analizado las características de las dos tecnologías presentes en la mayoría de los dispositivos móviles: Bluetooth y Wi-Fi.\\
+
+Bluetooth y Wi-Fi presentan similitudes en el modo de gestionar las comunicaciones, sin embargo, tal como resume la tabla \ref{tab:bluetooth_vs_wifi}, las diferencias relativas referentes a sus prestaciones técnicas son notables\cite{Saad2014}.\\
+Con el fin de aprovechar las fortalezas de ambas tecnologías, se ha diseñado una solución que responde a los criterios de seguridad y eficiencia descritos en las secciones \ref{lbl:seguridad} y \ref{lbl:eficiencia}.
+
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|l|c|c|}
+		\hline
+		Tecnología & Bluetooth & WPA\\\hline
+		Alcance & Corto & Amplio\\\hline
+		Tasa de transferencia & Baja & Alta\\\hline
+		Consumo energético & Bajo & Alto\\\hline
+		Nivel de seguridad & Bajo & Alto \\\hline
+		Mecanismo de seguridad & Clave de emparejamiento & WEP y WPA\\\hline
+	\end{tabular}
+	\caption{Comparativa de las tecnologías Bluetooth y Wi-Fi.}
+	\label{tab:bluetooth_vs_wifi}
+\end{table}
+
+
+\subsection{Wi-Fi}
+
+Wi-Fi es el nombre comercial de una tecnología de red de área local inalámbrica (\Gls{WLAN} ) promovida por la Wi-Fi Alliance. \\
+Cualquier WLAN enmarcada bajo la denominación Wi-Fi debe garantizar el cumplimiento del estándar IEEE 802.11, asegurando que los equipos de la red siguen de un conjunto de normas comunes en relación a los procesos que tienen lugar en las dos capas inferiores del modelo \Gls{OSI}.\cite{OSI}\\
+
+\paragraph*{Protocolos de transporte:}
+\label{protocolos_wifi}
+Puesto que la arquitectura de las comunicaciones sobre Wi-Fi responde al modelo TCP/IP\cite{TCPIP}, los dos protocolos de transporte más importantes que pueden ser identificados son \Gls{TCP} y \Gls{UDP}. Ambos presentan características propias que se detallan a continuación:
+
+\begin{itemize}
+	\item \textbf{TCP} es un protocolo orientado a conexión, en él, los dos extremos de una comunicación establecen un conexión virtual a través de la que es enviada toda la información. Su uso resulta especialmente útil para aplicaciones que requieren alta fiabilidad, puesto que no sólo garantiza la entrega de la información, sino que certifica esta es correcta y que se ha recibido en el orden el que fue enviada. Sin embargo, debe tenerse en cuenta que en ocasiones el coste asociado a los mecanismos que establecen y controlan la conexión sobrepasa ampliamente el requerido para enviar la información útil.
+	
+	\item \textbf{UDP} es un protocolo no orientado a conexión, por lo que la información es enviada sin garantizar su llegada al destino. Se trata de un protocolo simple pero rápido que no garantiza tampoco la entrega en orden de la información enviada, pero sí, que en caso de ser recibida, su contenido sea correcto. Su uso es por tanto muy apropiado para aplicaciones que necesitan transmisión rápida y efectiva.
+\end{itemize}
+
+
+Debido a su simplicidad y a que el volumen de datos transmitidos por el sistema es mínimo, se ha optado por emplear UDP, evitando así la sobrecarga asociada a una transmisión orientada a conexión.\\
+Como se detalla a continuación, ninguna de las principales limitaciones asociadas a las comunicaciones UDP supone un problema grave para el funcionamiento del sistema:
+
+\begin{itemize}
+	\item \textbf{Duplicidades:} Cuando la aplicación Slave recibe un comando desde Master (autorización o denegación), este es la respuesta a una solicitud remitida previamente, por tanto, tan pronto como es recibido se ejecuta la acción asociada. Si posteriormente llegasen duplicados, serían ignorados, puesto que Slave ya habría recibido respuesta a su petición y actuado en consecuencia.
+	\item \textbf{Perdidas:} En el improbable caso de la perdida de una solicitud, la aplicación Slave generaría una nueva petición al dispositivo móvil una vez el temporizador asociado a la respuesta esperada haya expirado.
+\end{itemize}
+
+\subsection{Bluetooth}
+\label{lbl:Bluetooth}
+ Bluetooth es una tecnología constituida por un conjunto de estándares para el intercambio de datos en distancias reducidas. Fue propuesto originalmente por la compañía sueca Ericsson con la intención ofrecer una alternativa sin cables al puerto serie RS-232.\\
+ La especificación es manejada en la actualidad por el Bluetooth Special Interest Group (SIG)\cite{Bluetooth_SIG}, una asociación en la que se enmarcan más de 20.000 compañías de diversos ámbitos tales como telecomunicaciones, informática, redes y electrónica de consumo.	
+
+\paragraph*{Protocolos}
+
+El número de protocolos existentes en Bluetooth es considerablemente menor al de las comunicaciones de Internet, sin embargo la clasificación de los mismos es similar. Puede distinguirse protocolos orientados y no orientados a conexión, tal y como se detalla a continuación:
+
+\begin{itemize}
+	\item \textbf{RFCOMM} es un protocolo que provee a grandes rasgos los mismos servicios y fiabilidad que \Gls{TCP}. Ofrece conectividad punto a punto y un intercambio fiable de datos, garantizando la entrega de los mismos.
+	La mayor diferencia con respecto a \Gls{TCP} reside en el número de puertos empleados, mientras las comunicaciones TCP disponen de 65535, RFCOMM ofrece únicamente 30, por lo que es necesario emplear mecanismos que permitan gestionarlos adecuadamente.
+	
+	\item \textbf{L2CAP} es un protocolo empleado comúnmente en situaciones donde la fiabilidad del envío no resulta crucial y el uso de RFCOMM suponen un esfuerzo muy superior al necesario para transmitir los datos en sí mismos.\\
+	Al contrario que \Gls{UDP}, L2CAP sí podría considerarse orientado a conexión, ya que ofrece mecanismos de confirmación, sin embargo, su nivel de fiabilidad puede ser configurado para obtener un funcionamiento similar a UDP, evitando las confirmaciones y reduciendo la sobrecarga asociada a la comunicación.\\
+	Un factor importante a tener en cuenta es que cualquier cambio en la configuración de L2CAP será extensible a todas las aplicaciones que estén empleando el adaptador.
+\end{itemize}
+
+
+\paragraph*{Service Discovery Protocol}
+\label{lbl:sdp}
+
+Tal y como sucede en las comunicaciones de Internet, las conexiones Bluetooth requieren una dirección y un puerto destino. Sin embargo, al tratarse de redes con un número de equipos reducido, no es necesario emplear mecanismos de traducción de direcciones y es posible utilizar la dirección física del adaptador para establecer la conexión.\\
+ Los dispositivos Bluetooth están asociados a un identificador único denominado \verb|Bluetooth address| que, al igual que las direcciones \Gls{MAC} de las tarjetas de red, es asignado por el fabricante. Su uso es indispensable, puesto que aun siendo posible asignar al adaptador un nombre, este no se encuentra regulado por autoridad alguna y por tanto no existe garantía de exclusividad, pudiendo darse la existencia de varios dispositivos con un mismo nombre en un entorno determinado.\\
+ Para conocer los identificadores de los dispositivos Bluetooth presentes en un área debe enviarse una solicitud de identificación mediante difusión, de modo que todos los adaptadores cercanos responderán proporcionando su nombre y \verb|Bluetooth address| asociados. \\
+
+Una vez que la dirección del adaptador es conocida, resta averiguar el puerto destino y el protocolo empleado para la conexión. Mientras que en TCP/IP el puerto de comunicación y el protocolo son conocidos por ambos extremos antes de iniciar la conexión, en las comunicaciones Bluetooth tan sólo conocerá el protocolo, ya que debido al reducido número de puertos empleados, estos son gestionados en tiempo de ejecución mediante un protocolo de asignación de puertos denominado Service Discovery Protocol(\Gls{SDP} ).\\
+
+SDP emplea un mecanismo de tipo publicación-suscripción, donde el equipo anfitrión ejecuta un servidor SDP que permanece a la escucha en un puerto reservado de L2CAP. Cuando una aplicación desea ofrecer un servicio sobre Bluetooth, debe registrar su nombre e identificador \Gls{UUID} en el SDP, el cuál procede a asignarle un puerto dinámicamente y almacenarlo en su lista de servicios ofertados.
+El UUID (Universally Unique Identifier) es número hexadecimal de 128 bits que identifica a un servicio en las publicaciones del servidor SDP. Puede ser asignado en tiempo de ejecución o acordado por las partes que participan en la comunicación, de modo que cuando una aplicación desea acceder a un servicio Bluetooth determinado, debe dirigirse al servidor SPD de la dirección destino y solicitar un listado de los servicios ofrecidos, o bien consultar el puerto asociado a un servicio concreto si conoce su UUID.
+
+\label{lbl:seguridad}
+\subsection{Seguridad}
+Acorde con la especificación de requisitos, el sistema debe ofrecer mecanismos que permitan la transmisión de datos de forma segura y garantizar que sólo los usuarios autorizados pueden operar la cerradura. Para cumplir ambas demandas, se ha han estudiado las características relativas a la seguridad de Bluetooth y Wi-Fi obteniendo los resultados que se exponen a continuación:
+
+La seguridad de las comunicaciones Bluetooth se basa en un mecanismo denominado emparejamiento mediante el cual dos adaptadores intercambian una clave que permite establecer una relación de confianza entre ambos. Cada adaptador almacena la dirección del otro en un listado de dispositivos que considera seguros, de modo que no es necesario repetir el proceso para comunicaciones futuras. Se trata en definitiva de un mecanismo simple, pero poco seguro.
+
+ Wi-Fi incorpora estándares de mayor seguridad que han sido refinados en las sucesivas evoluciones de la especificación 802.11\cite{WIFI_seguridad}.\\
+ A continuación se detallan las características de \Gls{WEP} y \Gls{WPA} , los dos principales sistemas de autentificación y encriptación empleados en este tipo de redes:
+
+\begin{itemize}
+	\item \textbf{WEP} es el sistema de cifrado incluido inicialmente en el estándar IEEE 802.11 para encriptar información sobre redes inalámbricas. Su cifrado se basa en el algoritmo RC4, el cuál emplea claves de 64 o 128 bits con una parte fija (clave) y una parte variable basada en un vector de inicialización (IV).\\
+	En los últimos años, han sido descubiertas una serie de graves vulnerabilidades que obligaron a dejar de considerarlo como un sistema de cifrado seguro, debido entre otros errores, a la reutilización constante del vector de inicialización que permite a los atacantes obtener la clave de cifrado con facilidad.
+	
+	\item \textbf{WPA:} es un sistema de autentificación y cifrado surgido con el objetivo de corregir las deficiencias existentes en \Gls{WEP}. Fue diseñado para ser empleado conjuntamente con un servidor de autentificación, sin embargo, en redes de pequeño tamaño, es posible hacer uso de una clave precompartida (\Gls{PSK}), cuyo uso, si bien debilita la seguridad de la red, evita la necesidad de contar con el servidor de claves.\\
+	Al igual que en WEP, el algoritmo de cifrado empleado es RC4, pero tanto la clave como el vector de inicialización son de un tamaño mayor. Siendo el tamaño de este último 48 bits, lo que hace altamente improbable la necesidad de repetirlo en una misma comunicación.\\
+	Si bien se han detectado ciertas vulnerabilidades que afectan a WPA, todavía es considerado un sistema seguro para la autentificación y cifrado de redes inalámbricas.
+\end{itemize}
+
+
+\subsection{Eficiencia}
+
+\label{lbl:eficiencia}
+Tal y como se describe en el sección \ref{aplicaciones}, dada la naturaleza limitada de los recursos, el desarrollo de aplicaciones para dispositivos móviles requiere un riguroso control sobre el uso que se hace de estos.\\
+El consumo eléctrico asociado a la ejecución de las aplicaciones constituye uno de los factores fundamentales a la hora de determinar su eficiencia, por ello, debe estudiarse meticulosamente el modo de reducirlo sin afectar ostensiblemente a la funcionalidad del sistema.
+
+Como puede detallan las figuras \ref{fig:bluetooth_power_consumption} y \ref{fig:wifi_power_consumption}, Bluetooth y WiFi ofrecen características dispares en cuanto al consumo energético, siendo la cantidad de energía necesaria para realizar una comunicación Bluetooth generalmente inferior a la requerida para llevar a cabo la misma operación mediante Wi-Fi. Dicha diferencia aumenta cuanto mayor es la tasa de transferencia de datos\cite{Balani}, como ejemplo, una transmisión sobre Wi-Fi con un ratio de 75 bytes por segundo supone un consumo de unos 80 milivatios, mientras que sobre Bluetooth la energía necesaria sería de tan sólo 2 milivatios.\\
+El mayor consumo asociado a las redes Wi-Fi está provocado, entre otros factores, por su mayor alcance, sin embargo, dado que el escenario de este proyecto no requiere transmisiones que cubran largas distancias, se priorizará el uso de Bluetooth siempre que las demandas relativas a la seguridad de la comunicación lo permitan.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/bluetooth_power_consumption}
+	\caption{Consumo asociado a transmisiones sobre Bluetooth}
+	\label{fig:bluetooth_power_consumption}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/wifi_power_consumption}
+	\caption{Consumo asociado a transmisiones sobre Wi-Fi}
+	\label{fig:wifi_power_consumption}
+\end{figure}
+
+Es importante destacar que el consumo de los dispositivos Bluetooth varía ostensiblemente según el modo en el que se encuentre el adaptador, pudiendo existir diferencias notables, tal como refleja la tabla \ref{tab:bluetooth_power_consumption}, donde se muestra la energía consumida por un teléfono móvil según el estado en que se encuentre su adaptador Bluetooth\cite{Siebra2012}.
+Los consumos en los diferentes estados han sido tenidos en cuenta para el diseño del sistema, priorizando la ejecución en el dispositivo móvil de actividades cuyos consumos energéticos son más moderados.
+
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{| l | c |}
+		\hline
+		\textbf{Estado del dispositivo} & \textbf{Consumo} \\ \hline
+		Bluetooth apagado & 10,4 mW \\ \hline
+		Bluetooth encendido & 12,52 mW \\ \hline
+		Bluetooth conectado pero ocioso (idle) & 62,44 mW \\ \hline
+		Bluetooth realizando una búsqueda & 220,19 mW \\ \hline
+		Bluetooth recibiendo datos & 415,98 mW \\ \hline
+	\end{tabular}
+	\caption{Consumo medio en base al estado del adaptador Bluetooth}
+	\label{tab:bluetooth_power_consumption}
+\end{table}
+
+
+\section{Aplicación Slave}
+
+Esta sección analiza desde un punto de vista técnico la aplicación empleada para gestionar la el prototipo de control, se ha incluido un apartado inicial denominado \verb|Cuestiones previas|, en él se ofrece una breve introducción al lenguaje de programación empleado y a la librería WiringPi.\\ 
+Los restantes apartados analizan las principales funciones de la aplicación agrupados del siguiente modo:
+
+\begin{itemize}
+	\item \textbf{Punto de acceso:} Incluye las funciones necesarias para proveer un punto de acceso inalámbrico que permita las conexiones seguras con el dispositivo móvil.
+	\item \textbf{Inicialización}: Detalla las tareas necesarias para iniciar el sistema, verificar el estado de los servicios y mantener un diccionario actualizado con las direcciones físicas de los dispositivos autorizados.
+	\item \textbf{Localización}: Agrupa los procedimientos que permiten localizar los dispositivos autorizados y gestionar el paso de los mismos a una conexión segura cuando se aproximan a la cerradura.
+	\item \textbf{Gestión de solicitudes:} Describe los procedimientos que permiten detectar las solicitudes de apertura, consultar a la aplicación Master y si es oportuno realizar las operaciones de apertura y cierre sobre la cerradura, verificando la validez del código de seguridad si fuese necesario.
+\end{itemize}
+
+\subsection{Cuestiones previas}
+
+\paragraph{Python} ha sido el lenguaje de programación empleado para el desarrollo de la aplicación Slave, se trata de un lenguaje versátil y potente que presenta una curva de aprendizaje moderada. Su uso es muy común en proyectos relacionados con la placa Raspberry Pi, por lo que la documentación disponible es muy abundante.\\
+La instalación predeterminada de Python en Raspbian contiene la mayor parte de los módulos necesarios para este proyecto, no obstante, ha sido necesario incluir adicionalmente los que se detallan a continuación:
+
+\begin{itemize}
+	\item \textbf{python-dev:} Contiene las herramientas de desarrollo y archivos de cabecera necesarios para desarrollar proyectos Python.	
+	\item \textbf{python-setuptools:} Facilita la descarga , instalación y desinstalación de paquetes Python.
+	\item \textbf{ipaddress:} Provee las herramientas necesarias para el manejo de direcciones IP.
+	\item \textbf{PyBluez:} Permite el acceso a los recursos Bluetooth del sistema desde el programa Python.
+\end{itemize}
+
+Los paquetes \verb|python-dev| y \verb|python-setuptools| se encuentran disponibles en el repositorio oficial de Raspbian Wheezy\footnote{deb http://archive.raspbian.org/raspbian wheezy main contrib non-free}, por lo que para su instalación bastará con emplear el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+$sudo apt-get install python-dev python-setuptools
+\end{lstlisting}
+
+El paquete \verb|ipaddress|, por su parte, puede ser obtenido empleando el instalador easy\_install de Python, tal y como se detalla a continuación:
+
+\begin{lstlisting}[language=bash]
+$sudo easy_install ipaddress
+\end{lstlisting}
+
+El módulo \verb|PyBluez| debe ser descargado e instalado manualmente siguiendo los siguientes pasos:
+
+Descargar del código
+\begin{lstlisting}[language=bash]
+$wget https://pypi.python.org/packages/source/P/PyBluez/PyBluez-0.20.zip
+\end{lstlisting}
+Descomprimir el archivo
+\begin{lstlisting}[language=bash]
+unzip PyBluez-0.20.zip
+\end{lstlisting}
+Instalar el módulo
+\begin{lstlisting}[language=bash]
+cd PyBluez-0.20
+sudo python setup.py install
+\end{lstlisting}
+
+\paragraph{WiringPi} 
+\label{lbl:wiringPi}
+es una librería escrita en C que permite gestionar los puertos GPIO de la placa Raspberry Pi (descritos en la sección \ref{sec:GPIO}).\\
+Aunque no se trata de una librería indispensable para el proyecto, ya que el sistema implementado no hace uso directo de ella, se ha considerado suficientemente relevante para ser incluida en este documento, debido a permite el manejo de los puertos GPIO directamente desde la línea de comandos, característica que ha sido de gran utilidad durante las fases de aprendizaje y pruebas.\\
+
+A continuación se detallan los pasos necesarios para obtener la librería y los comandos básicos para su funcionamiento:
+
+\begin{lstlisting}[language=bash]
+$git clone git://git.drogon.net/wiringPi
+$cd wiringPi
+$./build
+\end{lstlisting}
+
+Una vez compilada, la librería permite realizar operaciones básicas sobre los puertos GPIO, como ejemplo, se muestran a continuación una serie de ejemplos que actúan sobre el pin
+
+\begin{itemize}
+	\item \textbf{GPIO mode 4 out} Establece el pin en modo salida, con el fin de enviar una señal de control.
+	\item \textbf{GPIO write 4 1} Activa la salida, enviando tensión próxima a 3.3v.
+	\item \textbf{GPIO mode 4 in} Establece el pin en modo entrada, con el fin de recibir una señal de control.
+	\item \textbf{GPIO read 4} Comprueba el voltaje presente en el pin (indistintamente para entradas o salidas), devolviendo 1 en caso de que este sea cercano a 3.3v , o 0 si este es cercano a 0v.
+\end{itemize}
+
+WiringPi también permite obtener un listado de todos los puertos con su respectivo estado mediante el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+$gpio readall
+\end{lstlisting}
+
+El resultado obtenido será similar al mostrado en la figura \ref{fig:gpio_readall}. En ella puede apreciarse que cada pin es identificado en base a tres numeraciones diferentes (Física, wiringPi y BCM). Por ejemplo, el pin físico número 16 es identificado por la librería como GPIO 4, mientras que el chip Broadcom lo denomina pin 23. \\
+Dado que al principio esta nomenclatura resulta algo confusa, el comando se empleará a frecuentemente para consultar la tabla de correspondencias.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/gpio_readall}
+	\caption{Estado de los puertos GPIO obtenido mediante WiringPi}
+	\label{fig:gpio_readall}
+\end{figure}
+
+\subsection{Punto de acceso}
+\label{lbl:punto_de_acceso}
+En concordancia con lo descrito en el apartado \ref{lbl:operaciones_conexion}, la solución implementada debe proveer un punto de acceso Wi-Fi (AP) dotado de un servidor \Gls{DHCP} y soporte para la autentificación WPA.
+
+Se ha empleado la herramienta \verb|hostapd|\cite{hostapd} combinada con el servidor \verb|isc-dhcp-server| para gestionar el punto de acceso y la asignación dinámica de direcciones IP respectivamente. Los paquetes necesarios para la instalación de ambos están disponibles en los repositorios de los principales sistemas basados en Unix y pueden ser configurados siguiendo las instrucciones que se detallan a continuación:
+
+\paragraph{Hostapd}
+\label{lbl:hostapd}
+
+Tal y como describe la sección \ref{lbl:periféricos}, el adaptador inalámbrico empleado para este proyecto ha sido una tarjeta USB Edimax EW-7811Un\cite{edimax}. Aunque su chipset (rtl8188CUS) no está soportado por el servicio hostapd presente en el núcleo de Linux, el fabricante ofrece una versión propia con funcionalidades adicionales.
+
+A pesar de que se empleará la versión ofrecida por el fabricante, es recomendable instalar en primer lugar la versión propia de la distribución y a continuación reemplazar el archivo binario.\\
+En primer lugar se debe descargar e instalar hostapd desde el repositorio mediante el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install hostapd
+\end{lstlisting}
+
+A continuación, se debe descargar y descomprimir una copia de los controladores ofrecidos por el fabricante:
+
+\begin{lstlisting}[language=bash]
+wget edimax.com/edimax/mw/cufiles/files/download/Driver_Utility/transfer/Wireless/NIC/EW-7811Un/EW-7811Un_Linux_driver_v1.0.0.5.zip
+\end{lstlisting} 
+
+\begin{lstlisting}[language=bash]
+unzip EW-7811Un_Linux_driver_v1.0.0.5.zip
+cd EW-7811Un_Linux_driver_v1.0.0.5
+unzip EW-7811Un_USB_linux_v4.0.2_9000.20130911.zip
+\end{lstlisting} 
+
+Es recomendable crear una copia de seguridad del archivo hostapd de la distribución y reemplazarlo por un enlace al proporcionado por Edimax:
+
+\begin{lstlisting}[language=bash]
+sudo mv /usr/sbin/hostapd /usr/sbin/hostapd.bak
+sudo mv hostapd /usr/sbin/hostapd.edimax
+sudo ln -sf /usr/sbin/hostapd.edimax /usr/sbin/hostapd
+\end{lstlisting} 
+
+El archivo hostapd debe ser asignado al usuario \verb|root| para que disponga de suficientes privilegios para su ejecución:
+
+\begin{lstlisting}[language=bash]
+sudo chown root.root /usr/sbin/hostapd 
+sudo chmod 755 /usr/sbin/hostapd
+\end{lstlisting} 
+
+Debe procederse a editar el fichero de configuración de hostapd mediante el siguiente comando:
+
+\begin{lstlisting}[language=bash]
+sudo nano /etc/hostapd/hostapd.conf
+\end{lstlisting} 
+
+Una configuración básica de hostapd debe recoger al menos los siguientes parámetros:
+
+\begin{lstlisting}[language=bash]
+interface=wlan0
+driver=rtl871xdrv
+ssid=NombreDeLaRed
+channel=1
+wmm_enabled=0
+wpa=1
+wpa_passphrase=passDeLaRed
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+auth_algs=1
+macaddr_acl=0 
+\end{lstlisting} 
+
+Es recomendable reiniciar la máquina después de la edición del fichero:
+\begin{lstlisting}[language=bash]
+sudo reboot
+\end{lstlisting} 
+
+Una vez el sistema ha sido reiniciado, es posible comprobar el correcto funcionamiento de hostapd mediante el comando:
+\begin{lstlisting}[language=bash]
+sudo hostapd -dd /etc/hostapd/hostapd.conf
+\end{lstlisting} 
+Su ejecución debe crear un punto de acceso con los parámetros especificados en el fichero de configuración.\\
+Si el servicio funciona correctamente, se debe proceder a establecerlo como un daemon del sistema para que el punto de acceso se inicie cada vez que lo haga la placa Raspberry Pi:
+
+\begin{lstlisting}[language=bash]
+sudo nano /etc/default/hostapd
+\end{lstlisting} 
+
+Una vez abierto el fichero para edición, debe eliminarse la marca de comentario (\verb|#|) al inicio de la linea con el texto: \verb|DAEMON_CONF="/etc/hostapd/hostapd.conf"|
+
+\paragraph{isc-dhcp-server}
+
+Para permitir a los usuarios de la aplicación Master obtener una dirección IP dinámicamente se requiere la instalación y configuración de un servidor \Gls{DHCP}. Se ha empleado el paquete isc-dhcp-server, cuya instalación y configuración se detallan a continuación:
+
+Descargar e instalar el paquete isc-dhcp-server del repositorio oficial:
+
+\begin{lstlisting}[language=bash]
+sudo apt-get install isc-dhcp-server
+\end{lstlisting}
+
+Editar el fichero de configuración:
+
+\begin{lstlisting}[language=bash]
+nano -w /etc/dhcp/dhcpd.conf
+\end{lstlisting}
+
+Una vez abierto para edición, debe incluirse una configuración similar a la siguiente:
+
+\begin{lstlisting}[language=bash]
+default-lease-time 600;
+max-lease-time 7200;
+option subnet-mask 255.255.255.0;
+option broadcast-address 192.168.1.255;
+option routers 192.168.1.254;
+option domain-name-servers 192.168.1.1, 192.168.1.2;
+option domain-name "mydomain.example";
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+range 192.168.1.10 192.168.1.100;
+range 192.168.1.150 192.168.1.200;
+} 
+\end{lstlisting}
+
+\verb|isc-dhcp-server| permite prefijar una dirección para determinados dispositivos, esta característica resultará especialmente útil durante la fase de pruebas del proyecto, ya permitirá conocer de antemano la dirección que ha sido asignada al dispositivo empleado para realizar las mismas.
+Para obtener siempre la misma IP basta con añadir la dirección física del adaptador inalámbrico al fichero de configuración del siguiente modo:
+
+\begin{lstlisting}[language=bash]
+host nombre_del_dispositivo {
+hardware ethernet xx:xx:xx:xx:xx:xx;
+fixed-address 192.168.1.10;
+}
+\end{lstlisting}
+
+\subsection{Inicialización}
+\label{lbl:Slave_init}
+Para un correcto funcionamiento del sistema deben cumplirse las siguientes condiciones:
+
+\begin{itemize}
+	\item El punto de acceso ha sido creado y los servicios descritos en la sección \ref{lbl:punto_de_acceso} y el adaptador Bluetooth funcionan con normalidad.
+	\item Existe al menos un dispositivo autorizado para operar la cerradura y su adaptador Bluetooth ha sido emparejado previamente con el instalado en el circuito de control.
+	\item Los puertos \Gls{GPIO} de la placa Raspberry Pi han sido configurados y sus valores iniciales prefijados.
+	\item Se ha generado un diccionario que contiene las direcciones físicas todos los dispositivos registrados en el sistema.
+\end{itemize}
+
+
+Las implementaciones realizadas para comprobar el cumplimiento de estas condiciones se detallan a continuación:
+ 
+\paragraph{Servicios asociados} 
+
+El punto acceso inalámbrico y el servidor DHCP son servicios indispensables para el correcto funcionamiento del programa de control; sin embargo su inicialización depende del sistema operativo y no de la propia aplicación; por ello es necesario comprobar la disponibilidad de ambos cada vez que el programa sea ejecutado.
+
+
+Tal como define el código \ref{code:slave_os_call}, para verificar que tanto \verb|Hostapd| cómo \verb|Isc_dhcp_server| funcionan con normalidad se lanzará un requerimiento al sistema operativo para que proporcione un listado de los procesos en ejecución. \\
+Si alguno de los servicios no está presente en el listado o el adaptador Bluetooth no es accesible se activará el LED indicador de error referenciado mediante \verb|"SERVICES_OK_PIN"| y se procederá a crear una entrada de error en el Log de la aplicación.
+
+\lstinputlisting[language=Python, caption={Comprobación de los servicios},label={code:slave_os_call}, firstline=231, lastline=257]{./code/server.py}
+
+
+%TODO insertar aqui foto de los leds
+
+Si la inicialización de los servicios ha sido satisfactoria, se seguirá el flujo mostrado en la figura \ref{fig:control_main} , procediendo a crear el diccionario de dispositivos e iniciar los procesos asociados a la detección y gestión de solicitudes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/control_main}
+	\caption{Flujo de Inicialización de la aplicación de control}
+	\label{fig:control_main}
+\end{figure}
+
+
+\paragraph{Creación del diccionario}
+
+
+Puesto que la aplicación Slave precisará la dirección física de los adaptadores Bluetooth asociados durante el proceso de localización, y la dirección \Gls{MAC} del adaptador Wi-Fi para la gestión de las solicitudes de apertura, se ha implementado mediante el código \ref{code:slave_dictionary} un diccionario que contiene una entrada de tipo clave-valor para cada dispositivo registrado en la aplicación. En él, el primer elemento de cada tupla se corresponde con la dirección Bluetooth y el segundo con la dirección MAC.
+
+\lstinputlisting[language=Python,caption={Creación del diccionario de dispositivos},label={code:slave_dictionary}, firstline=104, lastline=112]{./code/server.py}
+
+\paragraph{Configuración GPIO }
+La aplicación emplea los puertos GPIO descritos en la sección \ref{sec:GPIO} para interactuar con los componentes del circuito de control. Para referenciarlos se establecen una serie de constantes definidas mediante el código \ref{code:slave_GPIO_pins}.
+
+\lstinputlisting[language=Python,caption={Distribución de los pines GPIO}, label={code:slave_GPIO_pins}, firstline=43, lastline=56]{./code/server.py}
+
+Tal como se introdujo en la sección \ref{lbl:wiringPi}, existen tres numeraciones posibles para los pines de la placa Raspberry Pi, por tanto, será necesario definir que numeración se está empleando y configurar los pines como entrada (pulsadores y sensores) o salida (LEDs indicadores y cerradura) antes de proceder a su inicialización, tal y como muestra el código \ref{code:slave_GPIO_pins_init}.
+
+\lstinputlisting[language=Python,caption={Inicialización de los pines GPIO}, label={code:slave_GPIO_pins_init}, firstline=66, lastline=78]{./code/server.py}
+
+
+\paragraph{Emparejamiento Bluetooth} 
+
+Acorde con lo descrito en la sección \ref{lbl:seguridad}, el funcionamiento del sistema requiere que el adaptador Bluetooth del circuito haya sido emparejado previamente con todos los dispositivos móviles registrados en el sistema. \\
+La creación de un asistente de emparejamiento no ha sido objeto de esta versión, pero su implementación se propone en las líneas futuras de la aplicación detalladas en el capítulo\ref{lbl:lineas_futuras} de este documento.\\
+A continuación se introduce una solución que permite llevar a cabo el emparejamiento manualmente empleando el paquete \verb|bluez-simple-agent| junto con el comando \verb|hcitool|:
+
+La herramienta \verb|hictool| está incluida por defecto en Raspbian, empleándola junto con el parámetro \verb|scan|, es posible obtener un listado de los dispositivos Bluetooth visibles en el entorno de un modo similar al siguiente:
+
+\begin{lstlisting}[language=bash]
+$hcitool scan
+Scanning ... 
+11:22:33:44:55:66 Nexus 4
+\end{lstlisting} 
+
+11:22:33:44:55:66 sería la dirección física del adaptador que se emplearía para hacer una solicitud de emparejamiento mediante el siguiente comando:
+\begin{lstlisting}[language=bash]
+$hcitool scan
+Scanning ... 
+11:22:33:44:55:66 Nexus 4
+\end{lstlisting} 
+
+\begin{lstlisting}[language=bash]
+$sudo bluez-simple-agent hci0 11:22:33:44:55:66
+\end{lstlisting} 
+
+A continuación se debe establecer un código de emparejamiento de 4 dígitos, que una vez introducido, será requerido también al dispositivo móvil, y si existe una coincidencia entre ambos códigos el emparejamiento finalizará con éxito.
+
+\paragraph{Inicio automático} 
+Es deseable que la aplicación Slave se inicie automáticamente, de modo que si se produce un reinicio accidental del circuito el sistema vuelva a funcionar sin necesidad de intervención alguna. Para ello, se ha procedido a asignar al programa permisos de ejecución, e incluir el código que permita iniciarlo en segundo plano en el fichero \verb|init/rc.local|:
+
+\begin{lstlisting}[language=bash]
+$chmod +x /servidor/server.py
+$sudo echo "sudo python servidor/server.py &" 
+>> init/rc.local
+\end{lstlisting} 
+
+\subsection{Localización}
+
+Acorde con lo expuesto en la sección \ref{lbl:modelos}, se han delegado sobre la aplicación Slave la responsabilidad de detectar a los dispositivos autorizados cuando se aproximan a cerradura, establecer una conexión con su adaptador Bluetooth y solicitar el paso a una conexión segura a través del punto de acceso.\\
+El flujo representado por la figura \ref{fig:pir_flow} describe el flujo seguido para realizar las labores de localización y paso a conexión segura.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{./images/pir_flow}
+	\caption{Secuencia de detección y solicitud de paso a conexión segura}
+	\label{fig:pir_flow}
+\end{figure}
+
+Analizando la figura anterior, puede observarse que un detector \Gls{PIR} analiza constantemente el entorno para permitir detectar la presencia de usuarios; cuando cualquier persona es detectada, el adaptador Bluetooth realiza un barrido del área, comprobando si alguno de los dispositivos registrados está a su alcance, en cuyo caso, contacta con su aplicación Master y le solicita el paso a una conexión segura en el AP.
+
+\paragraph{Detección PIR}
+
+Tal y como se detalla en la sección \ref{lbl:pir_bluetooth}, debido a limitaciones detectadas en los adaptadores Bluetooth empleados en la fase de pruebas, y con el objetivo de reducir el consumo eléctrico del sistema, se optó por la implantación de un detector pasivo de infrarrojos (PIR).\\
+El código \ref{code:slave_pir} implementa la gestión del detector, su funcionamiento es simple ya que se limita a invocar el análisis Bluetooth cada vez que se detecta una entrada positiva.
+
+\lstinputlisting[language=Python, caption={Escucha del detector PIR}, label={code:slave_pir}, firstline=303, lastline=309]{./code/server.py}
+
+\paragraph{Detección Bluetooth}
+\label{lbl:comunicación_bluetooth}
+La detección de movimiento por parte del detector \Gls{PIR} implica un aumento significativo de la probabilidad de que algún usuario se aproxime a la puerta con la intención de abrirla, por tanto, se debe proceder a realizar un barrido del entorno empleando la radio Bluetooth para tratar de localizar alguno de los dispositivos registrados.\\
+Las pruebas iniciales constataron que realizar un escaneo completo del área Bluetooth era un proceso demasiado lento, por ello, se optó por guiar la búsqueda que realiza la función \ref{code:slave_bluetooth_scan} empleando el diccionario de dispositivos detallado en la sección \ref{lbl:Slave_init} y el identificador (\Gls{UUID} ) del servicio ofrecido por la aplicación Master.\\
+La idea consiste en generar una consulta al servidor SPD (ver \ref{lbl:sdp}) de cada uno de los dispositivos registrados. Si el dispositivo no está en el área de acción del adaptador Bluetooh, la consulta fallará inmediatamente, y si se encuentra en las proximidades atenderá la petición.
+Dado que el UUID del servicio que se ejecuta sobre la aplicación Master es conocido, se ha incluido en las consultas, permitiendo agilizar la respuesta del servidor SPD, que en caso de recibir la consulta responderá proporcionando el puerto en el que se encuentra el servicio.
+
+\lstinputlisting[language=Python, caption={Escaneo del entorno Bluetooth}, label={code:slave_bluetooth_scan}, firstline=278, lastline=299]{./code/server.py}
+
+
+\paragraph{Comunicación Bluetooth}
+
+Cuando un dispositivo Bluetooth ha sido localizado y se ha obtenido el puerto en el que se encuentra el servicio ofrecido, la aplicación Slave debe conectarse al dispositivo y enviarle un mensaje mediante Bluetooth instándolo a que establezca una conexión con el punto de acceso.\\
+La función encargada de enviar la solicitud de paso a una conexión segura está definida por el código \ref{code:slave_bluetooth_connection}, en ella, puede apreciarse que después de enviar la solicitud de paso a conexión segura, la aplicación Slave espera una respuesta a través de Bluetooth que confirme la recepción del mensaje, sin embargo, no es necesario corroborar que el dispositivo móvil se ha conectado al punto de acceso, pues esta comprobación será llevada a cabo sólo en el caso de que se solicite la apertura de la cerradura.
+
+\lstinputlisting[language=Python, caption={Conexión al servicio Bluetooth}, label={code:slave_bluetooth_connection}, firstline=127, lastline=149]{./code/server.py}
+
+
+\subsection{Gestión de solicitudes}
+
+La gestión de solicitudes de apertura responde al flujo mostrado por la figura \ref{fig:gestion_solicitudes}, en ella puede apreciarse que existe un bucle continuo que analiza el estado del pulsador presente en el circuito. Cuando una pulsación es detectada, se comprueba que existe un dispositivo autorizado asociado al punto de acceso y se le solicita autorización para abrir la puerta. Si el dispositivo responde positivamente, se procede a la apertura de la puerta por un tiempo determinado y el ciclo vuelve a empezar.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{./images/gestion_solicitudes}
+	\caption{Secuencia de detección y solicitud de paso a conexión segura}
+	\label{fig:gestion_solicitudes}
+\end{figure}
+
+\paragraph{Pulsador}
+
+Acorde con el modelo detallado en la sección \ref{lbl:apertura_pulsador}, el circuito que gestiona la apertura de la puerta dispone de un pulsador que permite a los usuarios solicitar su apertura. Las pulsaciones son registradas por un hilo de la aplicación Slave mediante la función \verb|listen_for_button()|, donde tal como muestra el código\ref{code:slave_pulsador}, cuándo una pulsación es detectada, se invoca el mecanismo de autorización y se procede a bloquear el hilo durante un pequeño intervalo de tiempo para evitar que una pulsación prolongada sea interpretada como múltiples solicitudes.
+
+\lstinputlisting[language=Python,caption={Escucha asociada al pulsador}, label={code:slave_pulsador}, firstline=311, lastline=320]{./code/server.py}
+
+
+\paragraph*{Comunicación Wi-Fi}
+
+Siempre que el pulsador de la cerradura es activado, se procede a comprobar si algún dispositivo autorizado se encuentra asociado al punto de acceso mediante la función \ref{code:slave_is_associated}.
+EL procedimiento consiste en solicitar al sistema operativo que ejecute el comando \verb|hostapd_cli sta| para obtener una lista de todos los dispositivos asociados y una vez obtenida, aplicar un filtro buscando la dirección \Gls{MAC} de algún dispositivo autorizado.
+
+\lstinputlisting[language=Python, caption={Solicitud de autorización mediante Wi-Fi},label={code:slave_is_associated}, firstline=214, lastline=218]{./code/server.py}
+
+Si algún dispositivo es detectado, se procede a enviarle mediante Wi-Fi una solicitud de autorización, tal como define la función \ref{code:slave_wifi_auth_req}. Una vez enviada la solicitud, la aplicación Slave debe permanecer a la escucha en la interfaz inalámbrica esperando una respuesta.
+
+\lstinputlisting[language=Python, caption={Solicitud de autorización mediante Wi-Fi},label={code:slave_wifi_auth_req}, firstline=221, lastline=226]{./code/server.py}
+
+El código \ref{code:slave_wifi_listener} define una función que establece un puerto a la escucha y que ejercerá de punto de entrada para las comunicaciones seguras con los dispositivos autorizados.\\
+Cada vez que un mensaje es recibido, si se trata de alguna de las ordenes aceptadas por el sistema, se activará la función correspondiente y en caso contrario será descartado.
+
+\lstinputlisting[language=Python, caption={Escucha en la interfaz Wi-Fi},label={code:slave_wifi_listener}, firstline=260, lastline=276]{./code/server.py}
+
+\paragraph{Apertura y cierre}
+
+Cuando el usuario activa el pulsador del circuito de control, la aplicación Slave comprueba que al menos un dispositivo autorizado esta asociado al punto de acceso invocando la función \verb|is_associated(mac)| descrita en el código \ref{code:slave_associated_to_AP}.
+
+\lstinputlisting[language=Python, caption={Comprobación de los clientes asociados al AP}, label={code:slave_associated_to_AP}, firstline=214, lastline=218]{./code/server.py}
+
+Si el resultado de la llamada a la función \verb|is_associated(mac)| es positivo, se genera una solicitud de apertura, mediante el código \ref{code:slave_request_auth}, que será enviada a través de Wi-Fi a la aplicación Master instalada en del dispositivo asociado.
+
+\lstinputlisting[language=Python,caption={Código asociado a la solicitud de autorización}, label={code:slave_request_auth}, firstline=221, lastline=226]{./code/server.py}
+
+Finalmente, se procesará la respuesta recibida. En caso de que esta autorice la apertura y no se requiera contraseña o la contraseña proporcionada coincida con la almacenada en el servidor, se procederá a activar el pestillo de la puerta durante el tiempo fijado en la respuesta recibida.
+
+\lstinputlisting[language=Python,caption={Código asociado a la apertura de la puerta}, label={code:slave_open_door}, firstline=160, lastline=186]{./code/server.py}
+
+
+\section{Aplicación Master}
+Esta sección analiza desde un punto de vista técnico la aplicación que se instalará en el dispositivo móvil del usuario para autorizar la apertura de la cerradura.\\
+En una sección inicial denominada \verb|Cuestiones previas|, se describen el entorno y los permisos necesarios para ejecutar la aplicación, mientras que las restantes secciones describen las principales clases de la aplicación agrupándolas en base a su funcionalidad tal y como se detalla a continuación:
+
+\begin{itemize}
+	\item \textbf{ApTools:} Describe las funciones necesarias para gestionar la detección, configuración y conexión al punto de acceso proporcionado por la aplicación Slave.
+	\item \textbf{Servicios Bluetooth:} Analiza la clase encargada de realizar las operaciones que requieren interactuar con el adaptador Bluetooth.
+	\item \textbf{Tareas asíncronas:} Introduce la problemática asociada a las actividades con tiempos de ejecución prolongados y muestra el funcionamiento las soluciones implementadas. 
+	\item \textbf{Comunicación entre actividades:} Detalla los mecanismos de comunicación empleados y describe las clases implementadas.
+\end{itemize}
+
+
+\subsection{Cuestiones previas}
+%TODO Breve introducciónº
+
+\paragraph{Entorno}
+La aplicación Master ha sido diseñada para funcionar bajo el sistema operativo Android, su desarrollo se ha basado en el \Gls{API} 19 correspondiente a la versión 4.4 (KitKat), pero su ejecución está garantizada en los sistemas que soporten el API 15 o superior.
+
+\paragraph{Permisos}
+Todas las aplicaciones Android incluyen un archivo denominado \verb|manifest.xml| que contiene información esencial acerca de la programa y un listado de los permisos necesarios para el correcto funcionamiento de sus componentes.
+
+Los permisos requeridos por la aplicación Master son los siguientes:
+
+\begin{lstlisting}
+android.permission.INTERNET
+android.permission.ACCESS_NETWORK_STATE
+android.permission.ACCESS_WIFI_STATE
+android.permission.CHANGE_WIFI_STATE
+android.permission.BLUETOOTH
+android.permission.VIBRATE
+\end{lstlisting} 
+
+\subsection{ApTools}
+\label{lbl:ap_tools}
+ApTools es una clase que agrupa el conjunto de herramientas necesarias para detectar el punto de acceso, y establecer una conexión con el mismo.\\
+Tal como muestra el código \ref{code:master_ApTools_constructor}, cuando un objeto de la clase es instanciado, se activa el adaptador de red inalámbrica y se obtienen los valores de configuración para punto de acceso.
+
+\lstinputlisting[language=Java,caption={Constructor de la clase ApTools}, label={code:master_ApTools_constructor}, firstline=23, lastline=33]{./code/boltcontrol/APTools.java}
+
+Para realizar una conexión al punto de acceso, en primer lugar se realiza una llamada a la función \verb|isAPOnScanResults()| (mostrada en el código \ref{code:master_ApTools_isAPonScan}), y a continuación se ordena al adaptador de red realizar un análisis del entorno para obtener un listado de todos las redes disponibles, devolviendo finalmente un valor lógico que indica la disponibilidad del punto de acceso.
+
+\lstinputlisting[language=Java,caption={Obtención del listado de redes en el entorno}, label={code:master_ApTools_isAPonScan}, firstline=80, lastline=92]{./code/boltcontrol/APTools.java}
+
+En caso de que la red esté disponible, si no ha sido configurada con anterioridad, la función configureAP() detallada en el código \ref{code:master_ApTools_conf}) la inicializará con los valores almacenados en los ajustes de la aplicación.\\
+Si la red ya ha sido configura con anterioridad su configuración no se alterará y en ambos casos el resultado devuelto será un valor entero que identifica la configuración de la red.
+
+\lstinputlisting[language=Java,caption={Configuración de la red asociada al punto de acceso}, label={code:master_ApTools_conf}, firstline=35, lastline=58]{./code/boltcontrol/APTools.java}
+
+Finalmente, tal y como muestra el código de la función 	\ref{code:master_ApTools_connect}, se procede a deshabilitar temporalmente la configuración todas las demás redes, para forzar la conexión al punto de acceso mediante la llamada al método \verb|enableNetwork| del gestor de red inalámbrica \verb|WifiManager|.
+
+\lstinputlisting[language=Java,caption={Conexión al punto de acceso}, label={code:master_ApTools_connect}, firstline=60, lastline=74]{./code/boltcontrol/APTools.java}
+
+
+\subsection{Servicios Bluetooth}
+\label{lbl:bluetooth_connexion_class}
+Se ha implementado una clase denominada \verb|BluetoothConnexion| con el objetivo de agrupar todas las operaciones que se ejecutan sobre el adaptador Bluetooth.\\
+El principal método de la clase se corresponde con el código \ref{code:bluetooth_initialize}. Consiste en un inicializador que verifica la disponibilidad del adaptador y arranca el servicio Bluetooth, asignándole un identificador (\Gls{UUID}) que será empleado por la aplicación Slave para detectar el dispositivo móvil
+
+\lstinputlisting[language=Java,caption={Inicialización del servicio Bluetooth}, label={code:bluetooth_initialize}, firstline=41, lastline=61]{./code/boltcontrol/BluetoothConnexion.java}
+
+\subsection{Tareas asíncronas}
+\label{lbl:async_task}
+
+Tal y como se introduce en la sección \ref{lbl:ciclo_vida_android_app}, los componentes de una aplicación Android son ejecutados generalmente en un único hilo, por lo que los retardos generados en una parte de la aplicación afectarían a todas las funcionalidades de la misma, incluyendo la interfaz de usuario.
+Puesto que este funcionamiento daría lugar a evidentes problemas de usabilidad, pudiendo en algunos casos desembocar el cierre de la aplicación, Android provee a los desarrolladores una herramienta llamada \verb|AsyncTask|\cite{AsyncTask}, que permite la ejecución de tareas largas o costosas en un hilo propio.\\
+Las clases asíncronas que derivan de AsyncTask llevan a cabo las tareas críticas mediante un método denominado \verb|doInBackground|, que se ejecuta de manera independiente al resto de la aplicación y cuya evolución puede ser publicada mediante llamadas sucesivas al método \verb|onProgressUpdate|.
+
+\paragraph{Funciones de red}
+
+Como definen los códigos \ref{code:bluetooth_async_service} y \ref{code:wifi_async_service} el funcionamiento de la aplicación es requiere mantener un socket a la escucha para comunicaciones entrantes Bluetooth y Wi-Fi respectivamente. 
+Debido a que ambos procesos pueden implicar tiempos de espera prolongados, su integración en el hilo principal está específicamente desaconsejada en la guía de desarrollo Android\cite{NetworkException}, por ello, se ha optado por la creación de una clase asíncrona que las reúna y permita su ejecución paralela a la del resto de componentes.\\
+
+Aunque el diseño inicial de la aplicación establecía dos clases asíncronas independientes para las comunicaciones Bluetooth y Wi-Fi, fue modificado atendiendo a las recomendaciones introducidas en Honeycomb, mediante las cuales se desaconseja la ejecución de más de una tarea asíncrona de modo simultaneo\cite{MultipleAsyncTask}.\\ 
+Este cambio no supone alteraciones en el esquema general de funcionamiento, puesto que los servicios Bluetooth y Wi-Fi, tal como se puede apreciar en la figura figura \ref{fig:doInBackground}, alternan su ejecución en base al valor de las variables \verb|BTListener| y \verb|WifiListener|, de modo que el servicio Wi-Fi no ejecutará comunicación alguna hasta la finalización del servicio Bluetooth y viceversa.\\ 
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/doInBackground}
+	\caption{Flujo en segundo plano de la tarea asíncrona}
+	\label{fig:doInBackground}
+\end{figure}
+
+
+\lstinputlisting[language=Java,caption={Ejecución asíncrona del servicio bluetooth }, label={code:bluetooth_async_service}, firstline=68, lastline=91]{./code/boltcontrol/AsyncConnexion.java}
+
+\lstinputlisting[language=Java,caption={Ejecución asincrona del servicio Wifi }, label={code:wifi_async_service}, firstline=92, lastline=107]{./code/boltcontrol/AsyncConnexion.java}
+
+\paragraph{Publicacion del progreso}
+
+Tal como se mencionó en la introducción de la sección, el método \verb|publishProgress| es un mecanismo proporcionado por las clases asíncronas Android que permite transferir información entre los procesos en segundo plano y el hilo principal. En la clase implementada se ha hace uso de él para transmitir el contenido de todas las comunicaciones recibidas, independientemente de si proceden de la red Bluetooth o Wi-Fi.\\
+
+Cuando un mensaje es recibido, el método \verb|doInBackground| procede a analizarlo y transmitirlo mediante \verb|publishProgress| si se trata de alguno de los comandos aceptados por el sistema:
+
+\verb|CONNECT_CMD:| Comando que es recibido a través de Bluetooth e implica una solicitud de conexión segura por parte de la aplicación Slave. Se recibe cuando el circuito de la cerradura ha detectado al dispositivo móvil mediante un barrido Bluetooth y requiere que este se conecte al punto de acceso inalámbrico para poder establecer una comunicación confiable.
+En caso de recepción del comando, tal como define el código \ref{code:async_connect_cmd}, se envía una confirmación a la aplicación Slave para notificar que se va a iniciar la autentificación contra el AP, empleando para ello la clase \verb|APTools| descrita en el apartado \ref{lbl:ap_tools}.
+
+\lstinputlisting[language=Java,caption={Procesado de una solicitud de conexión}, label={code:async_connect_cmd}, firstline=112, lastline=120]{./code/boltcontrol/AsyncConnexion.java}
+
+
+\verb|AUTH_REQ:| Comando esperado para las conexiones Wi-Fi entrantes mediante el cuál se demanda una autorización para proceder a la apertura de la puerta. Su recepción implica que el botón de apertura presente en el circuito de la cerradura ha sido pulsado.
+ 
+ \lstinputlisting[language=Java,caption={Recepción del progreso de las tareas en segundo plano}, label={code:async_progress_update}, firstline=169, lastline=184]{./code/boltcontrol/AsyncConnexion.java}
+
+
+\paragraph{Autentificación}
+La aplicación admite dos configuraciones de seguridad seleccionables mediante el menú de ajustes:
+
+\begin{itemize}
+	\item \textbf{Autentificación simple:} La aplicación autoriza automáticamente todas las solicitudes de apertura y se limita a notificar al usuario mediante una vibración o pitido la acción. En este caso se asume que la seguridad proporcionada por el sistema es suficiente puesto que el dispositivo móvil está registrado en el sistema y se encuentra en las proximidades de la cerradura. 
+	El uso de esta configuración haría transparente el funcionamiento del sistema, el usuario sólo percibiría que al pulsar el botón la puerta se abre, no siendo consciente los procesos de detección y autentificación llevados a cabo previamente.
+
+	\item \textbf{Autentificación doble:} Incorpora un segundo nivel de seguridad, de modo que al recibir una solicitud de apertura, se requiere al usuario la introducción de un código de seguridad establecido en el momento del registro en el sistema, y por tanto conocido por la aplicación Slave.
+\end{itemize}
+
+En ambos casos el código código \ref{code:async_message} generará una respuesta autorizando o denegando la apertura que será trasmitida a través de la red Wi-Fi a la aplicación Slave. Adicionalmente, en el caso de las autorizaciones, la respuesta deberá incluir en la duración de la apertura y el código de seguridad si fuera necesario.
+
+\lstinputlisting[language=Java,caption={Procesado de los comandos del recibidos}, label={code:async_message}, firstline=121, lastline=163]{./code/boltcontrol/AsyncConnexion.java}
+
+Es importante resaltar que cuando el usuario haya configurado el sistema para emplear una autentificación doble, deberá generarse una dialogo que le permita introducir su código de seguridad. Dicho diálogo forma parte de la interfaz de usuario, sin embargo, dado que el método \verb|doInBackgroud| se ejecuta en un hilo independiente, la invocación deberá iniciarse desde el método \verb|onProgressUpdate|, que si bien forma parte de la clase asíncrona, es ejecutado en el hilo principal.
+
+\subsection{Comunicación entre actividades}
+
+Tal como se describió en el apartado \ref{lbl:intents}, los Intents constituyen un mecanismo para comunicación entre actividades y aplicaciones dentro de los sistemas Android. Mediante su uso el sistema notifica eventos relevantes (Llamada entrante, cambio de estado de la red, batería baja, conexión a la red eléctrica...) y son las aplicaciones quienes en caso de considerarlos significativos los capturan y proceden en consecuencia.\\
+
+Con el fin de capturar los Intents relevantes para el funcionamiento de la aplicación Master, se ha creado la clase \verb|CustomBroadcastReceiver|, que extiende de \verb|BroadcastReceiver|\cite{BroadcastReceiver} y que será la responsable de iniciar las acciones asociadas al Intent capturado.
+
+\lstinputlisting[language=Java,caption={Constructor de la clase CustomBroadcastReceiver}, label={code:CustomBroadcastReceiver_contructor}, firstline=19, lastline=23]{./code/boltcontrol/CustomBroadcastReceiver.java}
+
+La clase cuenta con un único método denominado \verb|onReceive|, definido mediante el código \ref{code:CustomBroadcastReceiver_onReceive}. Su funcionamiento se describe de modo simplificado mediante la figura \ref{fig:on_receive}, en ella puede apreciarse que cuando un Intent es admitido por el filtro asociado al Receiver, se procede estudia su campo \verb|action| para determinar si se trata de alguno de los siguientes eventos:
+
+\begin{itemize}
+	\item \textbf{Nuevo estado de red:} El Intent asociado se recibe cada vez que la red inalámbrica ha pasado a un nuevo estado. Su campo \verb|action| debe contener el valor \verb|WifiManager.NETWORK_STATE_CHANGED_ACTION|, sin embargo, su campo \verb|state| tiene trece estados posibles de los cuales sólo dos son relevantes para la aplicación: 
+	\begin{itemize}
+		\item Completado: Implica que el proceso de conexión a una nueva red ha concluido, en cuyo caso la aplicación procede a verificar si la nueva red se corresponde con el punto de acceso facilitado por la aplicación Slave.
+		\item Desconectado: Implica que aunque el adaptador se mantiene activo ya no tiene conexión a red alguna, por tanto independientemente de si la red con la que se ha perdido conectividad era el punto de acceso o no, deberá activarse la escucha a través de Bluetooth. 
+	\end{itemize}
+	\item \textbf{Nuevo estado del adaptador Bluetooth:} Se recibe cuando la radio Bluetooth es encendida o apagada. Su campo \verb|action| contiene el valor \verb|BluetoothAdapter.ACTION_STATE_CHANGED| y se trata de un evento importante puesto que el diseño de la aplicación requiere que el adaptador Bluetooth esté activo permanentemente, por tanto, en caso de que se reciba un mensaje indicando que ha sido apagado, se notificará al usuario la imposibilidad de mantener el sistema en funcionamiento y la aplicación se cerrará.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/on_receive.png}
+	\caption{Flujo asociado a la recepción de un Intent}
+	\label{fig:on_receive}
+\end{figure}
+
+\lstinputlisting[language=Java,caption={Recepción y analisis de los Intent en CustomBroadcastReceiver}, label={code:CustomBroadcastReceiver_onReceive}, firstline=26, lastline=71]{./code/boltcontrol/CustomBroadcastReceiver.java}
+
+\chapter{Pruebas y resultados}
+%TODO Añadir contenido aqui
+\chapter{Conclusiones y líneas futuras}
+\section{Líneas futuras}
+\label{lbl:lineas_futuras}
+La presente sección recoge un resumen de las características cuya necesidad o utilidad han sido detectadas durante el desarrollo del proyecto. la mayoría no han podido ser incluidas debido a que el esfuerzo necesario para implementarlas provocaría una importante desviación con respecto a la programación inicial, sin embargo deben ser consideradas como propuestas excluibles en las especificaciones de requisitos para futuras versiones del sistema. 
+
+\paragraph{Servidor Radius} Tal y cómo describe la sección \ref{lbl:soluciones_inalambricas}, se ha optado por emplear encriptación WPA para realizar comunicaciones seguras entre las aplicaciones Master y Slave.
+Aunque WPA fue diseñado inicialmente para ser empleado con un servidor de claves, en entornos con pocos usuarios es muy común su uso en la modalidad \Gls{PSK}, donde todos los usuarios comparten una misma clave, disminuyendo de ese modo tanto la complejidad como la seguridad del sistema.
+La instalación de un servidor Radius permitiría un control centralizado de los usuarios, pudiendo cada uno tener una clave propia que sería contrastada por el punto de acceso realizando una consulta al servidor de claves.\\
+El empleo de contraseñas propias reduciría las posibilidades de éxito de un ataque por fuerza bruta y las claves de autentificación y encriptación serían diferentes.\\
+Así mismo, el uso del servidor Radius también permitiría que la baja de un usuario, no signifique un riesgo para la seguridad del sistema, ni implique la redistribuir una nueva clave a todos los usuarios tal y como sucede en los sistemas basados en PSK. 
+
+\paragraph{Configuración inicial} Resultaría interesante la creación de una utilidad que permita configurar inicialmente el sistema, automatizando tareas como el emparejamiento de los dispositivos Bluetooth, el registro de los usuarios, o la configuración de la aplicación Máster.
+
+\paragraph{Base de datos} Debería considerarse en futuras versiones de la aplicación Slave, el empleo de una base de datos que permita manejar la información relativa a los usuarios registrados y al uso que los mismos hacen del sistema.
+La inclusión de la base de datos, permitiría no sólo obtener información estadística, sino añadir funciones adicionales, como establecer bloqueos o autorizaciones temporales para un usuario o grupo determinados.
+
+\paragraph{Interfaz de Administración} Sería adecuado incluir en posteriores versiones de la aplicación Slave una interfaz de administración que facilite las labores de gestión y permita obtener estadísticas del funcionamiento del sistema.
+
+\paragraph{Bluetooth} Se ha comprobado que el análisis del entorno llevado a cabo por el adaptador Bluetooth requiere un tiempo mayor a medida que se incrementa el número de usuarios registrados, por ello, si en un futuro el sistema debiese dar servicio a un número elevado de usuarios sería aconsejable estudiar una alternativa que permita tener respuestas en un tiempo más reducido.
+
+\paragraph{Ultrasonidos + PIR} Tal como se menciona en la sección \ref{fig:Android-System-Architecture}\ref{lbl:PIR}, los dispositivos PIR presentan una serie de limitaciones que pueden provocar una disminución en su eficiencia bajo determinadas condiciones del entorno. 
+Cuando la temperatura ambiente próxima a los 36 grados aumenta la posibilidad de un funcionamiento erróneo del detector, por ello, se propone el uso combinado del PIR con un sensor que no se vea afectado por las condiciones de temperatura alta o cambiante, como podría ser el caso de los detectores de movimiento basados en ultrasonidos.
+
+\paragraph{Doble autentificación} El sistema de doble autentificación detallado en la sección \ref{lbl:doble_autentificación} es simple y su funcionalidad debería ser ampliada para permitir entre otras cosas que el usuario pueda actualizar su código de seguridad si lo desea.
+
+\paragraph{Autorizaciones temporales} Se ha considerado que sería interesante incluir en futuras versiones un sistema que permita establecer autorizaciones temporales de dos tipos:
+\begin{itemize}
+	\item \textbf{Gestionadas por el administrador:} En el supuesto de que existan usuarios eventuales, el administrador del sistema podría dar permisos a un usuario sobre una cerradura por un periodo de tiempo determinado.
+	\item \textbf{Gestionadas por los usuarios:} Cualquier usuario podría generar en la aplicación Master una autorización temporal y enviarla a otro usuario especificando la cerradura y la duración permitidas. Una vez el segundo usuario hubiese recibido el mensaje, podría abrir la cerradura durante el plazo estipulado.\\
+	Esta funcionalidad estaría indicada para autorizaciones breves y puntuales, siendo más adecuado para periodos mayores, el uso de las autorizaciones gestionadas por el administrador .
+\end{itemize}
+
+\section{Conclusiones}
+%TODO Faltan conclusiones
+
+\chapter{Manual usuario}
+%TODO Redactar al acabar todo
+
+\listoffigures
+\lstlistoflistings
+\bibliography{bibliografia}{}
+\bibliographystyle{bibliografia}
+\printglossary[]
+
+
+\end{document}
