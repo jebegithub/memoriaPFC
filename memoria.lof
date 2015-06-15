@@ -2,41 +2,41 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Difusi\IeC {\'o}n de sistemas operativos para dispositivos m\IeC {\'o}viles\relax }}{10}{figure.caption.2}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Arquitectura de un sistema Android\relax }}{11}{figure.caption.3}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Ciclo vital de una actividad Android\relax }}{12}{figure.caption.5}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Selecci\IeC {\'o}n del hardware de un dispositivo virtual\relax }}{15}{figure.caption.7}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces SDK Manager en Android Studio\relax }}{16}{figure.caption.8}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Raspberry Pi modelo B+\relax }}{16}{figure.caption.9}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Distribuci\IeC {\'o}n de los 26 primeros puertos GPIO\relax }}{19}{figure.caption.16}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Difusi\IeC {\'o}n de sistemas operativos para dispositivos m\IeC {\'o}viles\relax }}{11}{figure.caption.2}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Arquitectura de un sistema Android\relax }}{12}{figure.caption.3}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Ciclo vital de una actividad Android\relax }}{13}{figure.caption.5}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Selecci\IeC {\'o}n del hardware de un dispositivo virtual\relax }}{16}{figure.caption.7}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces SDK Manager en Android Studio\relax }}{17}{figure.caption.8}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Raspberry Pi modelo B+\relax }}{17}{figure.caption.9}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Distribuci\IeC {\'o}n de los 26 primeros puertos GPIO\relax }}{19}{figure.caption.13}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Listado de los discos disponibles en el sistema\relax }}{20}{figure.caption.19}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Generaci\IeC {\'o}n de las claves RSA}}{21}{figure.caption.22}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Acceso a la configuraci\IeC {\'o}n b\IeC {\'a}sica de Raspbian\relax }}{22}{figure.caption.24}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Configuraci\IeC {\'o}n de un int\IeC {\'e}rprete remoto en PyCharm\relax }}{24}{figure.caption.29}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Prototipo del circuito que controla la cerradura\relax }}{25}{figure.caption.30}
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Cerradura el\IeC {\'e}ctrica de tipo "normalmente cerrado"\relax }}{26}{figure.caption.31}
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Esquema de un rel\IeC {\'e} opto-acoplado\relax }}{27}{figure.caption.32}
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Rel\IeC {\'e} opto-aislante comercial\relax }}{27}{figure.caption.33}
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Detector pasivo por infrarrojos\relax }}{28}{figure.caption.34}
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Placa de pruebas empleada en el prototipo\relax }}{28}{figure.caption.35}
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Cobbler para el conexionado de Raspberry pi B+\relax }}{29}{figure.caption.36}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Generaci\IeC {\'o}n de las claves RSA}}{22}{figure.caption.22}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Acceso a la configuraci\IeC {\'o}n b\IeC {\'a}sica de Raspbian\relax }}{23}{figure.caption.24}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Configuraci\IeC {\'o}n de un int\IeC {\'e}rprete remoto en PyCharm\relax }}{25}{figure.caption.29}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Prototipo del circuito que controla la cerradura\relax }}{26}{figure.caption.30}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Cerradura el\IeC {\'e}ctrica de tipo "normalmente cerrado"\relax }}{27}{figure.caption.31}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Esquema de un rel\IeC {\'e} opto-acoplado\relax }}{28}{figure.caption.32}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Rel\IeC {\'e} opto-aislante comercial\relax }}{28}{figure.caption.33}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Detector pasivo por infrarrojos\relax }}{29}{figure.caption.34}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Placa de pruebas empleada en el prototipo\relax }}{30}{figure.caption.35}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Cobbler para el conexionado de Raspberry pi B+\relax }}{30}{figure.caption.36}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Flujo de la b\IeC {\'u}squeda exhaustiva del AP\relax }}{34}{figure.caption.40}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Flujo asociado a la b\IeC {\'u}squeda guiada por giroscopio\relax }}{35}{figure.caption.42}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Flujo asociado a la b\IeC {\'u}squeda del AP orientada por RSSI\relax }}{36}{figure.caption.44}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Secuencia de registro mediante Bluetooth + Wi-Fi\relax }}{37}{figure.caption.46}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Detecci\IeC {\'o}n y conexi\IeC {\'o}n mediante PIR + Bluetooth + Wi-Fi\relax }}{38}{figure.caption.48}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Apertura de la cerradura basada en RSSI\relax }}{39}{figure.caption.50}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Apertura de la cerradura basada en pulsador\relax }}{41}{figure.caption.52}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Apertura de la cerradura basada en c\IeC {\'o}digo\relax }}{42}{figure.caption.54}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Consumo asociado a transmisiones sobre Bluetooth\relax }}{48}{figure.caption.59}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Consumo asociado a transmisiones sobre Wi-Fi\relax }}{48}{figure.caption.60}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Estado de los puertos GPIO obtenido mediante WiringPi\relax }}{52}{figure.caption.64}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Flujo de Inicializaci\IeC {\'o}n de la aplicaci\IeC {\'o}n de control\relax }}{57}{figure.caption.68}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Secuencia de detecci\IeC {\'o}n y solicitud de paso a conexi\IeC {\'o}n segura\relax }}{60}{figure.caption.73}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Secuencia de detecci\IeC {\'o}n y solicitud de paso a conexi\IeC {\'o}n segura\relax }}{63}{figure.caption.77}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Flujo en segundo plano de la tarea as\IeC {\'\i }ncrona\relax }}{72}{figure.caption.84}
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Flujo asociado a la recepci\IeC {\'o}n de un Intent\relax }}{78}{figure.caption.87}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Flujo de la b\IeC {\'u}squeda exhaustiva del AP\relax }}{36}{figure.caption.40}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Flujo asociado a la b\IeC {\'u}squeda guiada por giroscopio\relax }}{37}{figure.caption.42}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Flujo asociado a la b\IeC {\'u}squeda del AP orientada por RSSI\relax }}{38}{figure.caption.44}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Secuencia de registro mediante Bluetooth + Wi-Fi\relax }}{39}{figure.caption.46}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Detecci\IeC {\'o}n y conexi\IeC {\'o}n mediante PIR + Bluetooth + Wi-Fi\relax }}{40}{figure.caption.48}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Apertura de la cerradura basada en RSSI\relax }}{41}{figure.caption.50}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Apertura de la cerradura basada en pulsador\relax }}{43}{figure.caption.52}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Apertura de la cerradura basada en c\IeC {\'o}digo\relax }}{44}{figure.caption.54}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Consumo asociado a transmisiones sobre Bluetooth\relax }}{50}{figure.caption.59}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Consumo asociado a transmisiones sobre Wi-Fi\relax }}{50}{figure.caption.60}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Estado de los puertos GPIO obtenido mediante WiringPi\relax }}{54}{figure.caption.64}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Flujo de Inicializaci\IeC {\'o}n de la aplicaci\IeC {\'o}n de control\relax }}{59}{figure.caption.68}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Secuencia de detecci\IeC {\'o}n y solicitud de paso a conexi\IeC {\'o}n segura\relax }}{62}{figure.caption.73}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Secuencia de detecci\IeC {\'o}n y solicitud de paso a conexi\IeC {\'o}n segura\relax }}{65}{figure.caption.77}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Flujo en segundo plano de la tarea as\IeC {\'\i }ncrona\relax }}{74}{figure.caption.84}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Flujo asociado a la recepci\IeC {\'o}n de un Intent\relax }}{80}{figure.caption.86}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

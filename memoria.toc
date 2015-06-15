@@ -1,100 +1,106 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{4}{chapter.1}
-\contentsline {section}{\numberline {1.1}Descripci\IeC {\'o}n general del sistema}{4}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Estructura}{5}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Funcionamiento}{5}{subsection.1.1.2}
-\contentsline {section}{\numberline {1.2}Acerca de este documento}{6}{section.1.2}
-\contentsline {chapter}{\numberline {2}Planificaci\IeC {\'o}n temporal y econ\IeC {\'o}mica}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}Planificaci\IeC {\'o}n temporal}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Planificaci\IeC {\'o}n econ\IeC {\'o}mica}{8}{section.2.2}
-\contentsline {chapter}{\numberline {3}Entorno de trabajo}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Android}{9}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Sistema operativo}{10}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Aplicaciones}{11}{subsection.3.1.2}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Acerca de este documento}{5}{section.1.1}
+\contentsline {section}{\numberline {1.2}Descripci\IeC {\'o}n general del sistema}{6}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Estructura}{7}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Funcionamiento}{7}{subsection.1.2.2}
+\contentsline {chapter}{\numberline {2}Planificaci\IeC {\'o}n temporal y econ\IeC {\'o}mica}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}Planificaci\IeC {\'o}n temporal}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Planificaci\IeC {\'o}n econ\IeC {\'o}mica}{9}{section.2.2}
+\contentsline {chapter}{\numberline {3}Entorno de trabajo}{10}{chapter.3}
+\contentsline {section}{\numberline {3.1}Android}{10}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Sistema operativo}{11}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Aplicaciones}{12}{subsection.3.1.2}
 \contentsline {paragraph}{Ciclo de vida}{12}{section*.4}
-\contentsline {subsection}{\numberline {3.1.3}Intents}{13}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Android Studio}{14}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}JDK y SDK}{15}{subsection.3.1.5}
-\contentsline {section}{\numberline {3.2}Raspberry Pi}{16}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Caracter\IeC {\'\i }sticas}{17}{subsection.3.2.1}
-\contentsline {paragraph}{Chipset:}{17}{section*.11}
-\contentsline {paragraph}{Almacenamiento}{17}{section*.13}
-\contentsline {paragraph}{Perif\IeC {\'e}ricos}{17}{section*.14}
-\contentsline {paragraph}{GPIO}{18}{section*.15}
-\contentsline {subsection}{\numberline {3.2.2}Configuraci\IeC {\'o}n}{19}{subsection.3.2.2}
-\contentsline {subparagraph}{Instalaci\IeC {\'o}n de la imagen}{19}{section*.18}
-\contentsline {subsection}{\numberline {3.2.3}Pycharm}{23}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Circuito de control}{24}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Cerradura}{25}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Rel\IeC {\'e}}{26}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Detector PIR}{27}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Placa de pruebas}{28}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Cobbler}{28}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}Otros componentes}{29}{subsection.3.3.6}
-\contentsline {subsection}{\numberline {3.3.7}Alimentaci\IeC {\'o}n el\IeC {\'e}ctrica}{29}{subsection.3.3.7}
-\contentsline {section}{\numberline {3.4}Documentaci\IeC {\'o}n}{29}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Latex}{29}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Referencias}{30}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Control de versiones}{30}{section.3.5}
-\contentsline {chapter}{\numberline {4}Integraci\IeC {\'o}n}{32}{chapter.4}
-\contentsline {section}{\numberline {4.1}Modelos dise\IeC {\~n}ados}{32}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Aproximaci\IeC {\'o}n inicial}{32}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Operaciones de conexi\IeC {\'o}n}{33}{subsection.4.1.2}
-\contentsline {paragraph}{B\IeC {\'u}squeda exhaustiva}{33}{section*.39}
-\contentsline {paragraph}{B\IeC {\'u}squeda guiada por giroscopio}{34}{section*.41}
-\contentsline {paragraph}{B\IeC {\'u}squeda guiada por RSSI}{35}{section*.43}
-\contentsline {paragraph}{B\IeC {\'u}squeda guiada por Bluetooth}{36}{section*.45}
-\contentsline {paragraph}{B\IeC {\'u}squeda guiada por PIR + Bluetooth}{37}{section*.47}
-\contentsline {subsection}{\numberline {4.1.3}Operaciones apertura/cierre}{38}{subsection.4.1.3}
-\contentsline {paragraph}{Operaciones guiadas por RSSI}{38}{section*.49}
-\contentsline {paragraph}{Operaciones guiadas por pulsador}{39}{section*.51}
-\contentsline {paragraph}{Doble autentificaci\IeC {\'o}n}{41}{section*.53}
-\contentsline {section}{\numberline {4.2}Soluciones inal\IeC {\'a}mbricas}{42}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Wi-Fi}{43}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Bluetooth}{44}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Seguridad}{46}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Eficiencia}{47}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}Aplicaci\IeC {\'o}n Slave}{49}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Cuestiones previas}{50}{subsection.4.3.1}
-\contentsline {paragraph}{Python}{50}{section*.62}
-\contentsline {paragraph}{WiringPi}{51}{section*.63}
-\contentsline {subsection}{\numberline {4.3.2}Punto de acceso}{52}{subsection.4.3.2}
-\contentsline {paragraph}{Hostapd}{52}{section*.65}
-\contentsline {paragraph}{isc-dhcp-server}{54}{section*.66}
-\contentsline {subsection}{\numberline {4.3.3}Inicializaci\IeC {\'o}n}{55}{subsection.4.3.3}
-\contentsline {paragraph}{Servicios asociados}{55}{section*.67}
-\contentsline {paragraph}{Creaci\IeC {\'o}n del diccionario}{57}{section*.69}
-\contentsline {paragraph}{Configuraci\IeC {\'o}n GPIO }{57}{section*.70}
-\contentsline {paragraph}{Emparejamiento Bluetooth}{58}{section*.71}
-\contentsline {paragraph}{Inicio autom\IeC {\'a}tico}{59}{section*.72}
-\contentsline {subsection}{\numberline {4.3.4}Localizaci\IeC {\'o}n}{59}{subsection.4.3.4}
-\contentsline {paragraph}{Detecci\IeC {\'o}n PIR}{60}{section*.74}
-\contentsline {paragraph}{Detecci\IeC {\'o}n Bluetooth}{61}{section*.75}
-\contentsline {paragraph}{Comunicaci\IeC {\'o}n Bluetooth}{62}{section*.76}
-\contentsline {subsection}{\numberline {4.3.5}Gesti\IeC {\'o}n de solicitudes}{63}{subsection.4.3.5}
-\contentsline {paragraph}{Pulsador}{63}{section*.78}
-\contentsline {paragraph}{Apertura y cierre}{65}{section*.80}
-\contentsline {section}{\numberline {4.4}Aplicaci\IeC {\'o}n Master}{67}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Cuestiones previas}{67}{subsection.4.4.1}
-\contentsline {paragraph}{Entorno}{67}{section*.81}
-\contentsline {paragraph}{Permisos}{67}{section*.82}
-\contentsline {subsection}{\numberline {4.4.2}ApTools}{68}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Servicios Bluetooth}{70}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Tareas as\IeC {\'\i }ncronas}{71}{subsection.4.4.4}
-\contentsline {paragraph}{Funciones de red}{71}{section*.83}
-\contentsline {paragraph}{Publicacion del progreso}{73}{section*.85}
-\contentsline {paragraph}{Autentificaci\IeC {\'o}n}{75}{section*.86}
-\contentsline {subsection}{\numberline {4.4.5}Comunicaci\IeC {\'o}n entre actividades}{77}{subsection.4.4.5}
-\contentsline {chapter}{\numberline {5}Pruebas y resultados}{81}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusiones y l\IeC {\'\i }neas futuras}{82}{chapter.6}
-\contentsline {section}{\numberline {6.1}L\IeC {\'\i }neas futuras}{82}{section.6.1}
-\contentsline {paragraph}{Servidor Radius}{82}{section*.88}
-\contentsline {paragraph}{Configuraci\IeC {\'o}n inicial}{83}{section*.89}
-\contentsline {paragraph}{Base de datos}{83}{section*.90}
-\contentsline {paragraph}{Interfaz de Administraci\IeC {\'o}n}{83}{section*.91}
-\contentsline {paragraph}{Bluetooth}{83}{section*.92}
-\contentsline {paragraph}{Ultrasonidos + PIR}{83}{section*.93}
-\contentsline {paragraph}{Doble autentificaci\IeC {\'o}n}{83}{section*.94}
-\contentsline {paragraph}{Autorizaciones temporales}{83}{section*.95}
-\contentsline {section}{\numberline {6.2}Conclusiones}{84}{section.6.2}
-\contentsline {chapter}{\numberline {7}Manual usuario}{85}{chapter.7}
+\contentsline {subsection}{\numberline {3.1.3}Intents}{14}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Android Studio}{15}{subsection.3.1.4}
+\contentsline {paragraph}{AVD Manager}{15}{section*.6}
+\contentsline {subsection}{\numberline {3.1.5}JDK y SDK}{16}{subsection.3.1.5}
+\contentsline {section}{\numberline {3.2}Raspberry Pi}{17}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Caracter\IeC {\'\i }sticas}{18}{subsection.3.2.1}
+\contentsline {paragraph}{Chipset}{18}{section*.11}
+\contentsline {paragraph}{GPIO}{18}{section*.12}
+\contentsline {paragraph}{Almacenamiento}{19}{section*.15}
+\contentsline {paragraph}{Perif\IeC {\'e}ricos}{19}{section*.16}
+\contentsline {subsection}{\numberline {3.2.2}Configuraci\IeC {\'o}n}{20}{subsection.3.2.2}
+\contentsline {subparagraph}{Instalaci\IeC {\'o}n de la imagen}{20}{section*.18}
+\contentsline {subsection}{\numberline {3.2.3}Pycharm}{24}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Circuito de control}{25}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Cerradura}{26}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Rel\IeC {\'e}}{27}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Wi-Fi}{28}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Bluetooth}{29}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Detector PIR}{29}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Placa de pruebas}{29}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}Cobbler}{30}{subsection.3.3.7}
+\contentsline {subsection}{\numberline {3.3.8}Alimentaci\IeC {\'o}n el\IeC {\'e}ctrica}{30}{subsection.3.3.8}
+\contentsline {subsection}{\numberline {3.3.9}Otros componentes}{31}{subsection.3.3.9}
+\contentsline {section}{\numberline {3.4}Documentaci\IeC {\'o}n}{31}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Latex}{31}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Referencias}{32}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Control de versiones}{32}{section.3.5}
+\contentsline {chapter}{\numberline {4}Integraci\IeC {\'o}n}{34}{chapter.4}
+\contentsline {section}{\numberline {4.1}Modelos dise\IeC {\~n}ados}{34}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Aproximaci\IeC {\'o}n inicial}{34}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Operaciones de conexi\IeC {\'o}n}{35}{subsection.4.1.2}
+\contentsline {paragraph}{B\IeC {\'u}squeda exhaustiva: }{35}{section*.39}
+\contentsline {paragraph}{B\IeC {\'u}squeda guiada por giroscopio: }{36}{section*.41}
+\contentsline {paragraph}{B\IeC {\'u}squeda guiada por RSSI: }{37}{section*.43}
+\contentsline {paragraph}{B\IeC {\'u}squeda guiada por Bluetooth:}{38}{section*.45}
+\contentsline {paragraph}{B\IeC {\'u}squeda guiada por PIR + Bluetooth:}{39}{section*.47}
+\contentsline {subsection}{\numberline {4.1.3}Operaciones apertura/cierre}{40}{subsection.4.1.3}
+\contentsline {paragraph}{Operaciones guiadas por RSSI:}{40}{section*.49}
+\contentsline {paragraph}{Operaciones guiadas por pulsador:}{41}{section*.51}
+\contentsline {paragraph}{Doble autentificaci\IeC {\'o}n:}{43}{section*.53}
+\contentsline {section}{\numberline {4.2}Soluciones inal\IeC {\'a}mbricas}{44}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Wi-Fi}{45}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Bluetooth}{46}{subsection.4.2.2}
+\contentsline {paragraph}{Protocolos:}{46}{section*.57}
+\contentsline {paragraph}{Service Discovery Protocol:}{47}{section*.58}
+\contentsline {subsection}{\numberline {4.2.3}Seguridad}{48}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Eficiencia}{49}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Aplicaci\IeC {\'o}n Slave}{51}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Cuestiones previas}{52}{subsection.4.3.1}
+\contentsline {paragraph}{Python}{52}{section*.62}
+\contentsline {paragraph}{WiringPi}{53}{section*.63}
+\contentsline {subsection}{\numberline {4.3.2}Punto de acceso}{54}{subsection.4.3.2}
+\contentsline {paragraph}{Hostapd:}{54}{section*.65}
+\contentsline {paragraph}{isc-dhcp-server:}{56}{section*.66}
+\contentsline {subsection}{\numberline {4.3.3}Inicializaci\IeC {\'o}n}{57}{subsection.4.3.3}
+\contentsline {paragraph}{Servicios asociados:}{57}{section*.67}
+\contentsline {paragraph}{Creaci\IeC {\'o}n del diccionario:}{59}{section*.69}
+\contentsline {paragraph}{Configuraci\IeC {\'o}n GPIO:}{59}{section*.70}
+\contentsline {paragraph}{Emparejamiento Bluetooth:}{60}{section*.71}
+\contentsline {paragraph}{Inicio autom\IeC {\'a}tico:}{61}{section*.72}
+\contentsline {subsection}{\numberline {4.3.4}Localizaci\IeC {\'o}n:}{61}{subsection.4.3.4}
+\contentsline {paragraph}{Detecci\IeC {\'o}n PIR:}{62}{section*.74}
+\contentsline {paragraph}{Detecci\IeC {\'o}n Bluetooth:}{63}{section*.75}
+\contentsline {paragraph}{Comunicaci\IeC {\'o}n Bluetooth:}{64}{section*.76}
+\contentsline {subsection}{\numberline {4.3.5}Gesti\IeC {\'o}n de solicitudes}{65}{subsection.4.3.5}
+\contentsline {paragraph}{Pulsador:}{65}{section*.78}
+\contentsline {paragraph}{Comunicaci\IeC {\'o}n Wi-Fi:}{66}{section*.79}
+\contentsline {paragraph}{Apertura y cierre:}{67}{section*.80}
+\contentsline {section}{\numberline {4.4}Aplicaci\IeC {\'o}n Master}{69}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Cuestiones previas}{69}{subsection.4.4.1}
+\contentsline {paragraph}{Entorno:}{69}{section*.81}
+\contentsline {paragraph}{Permisos:}{69}{section*.82}
+\contentsline {subsection}{\numberline {4.4.2}ApTools}{70}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Servicios Bluetooth}{72}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}Tareas as\IeC {\'\i }ncronas}{73}{subsection.4.4.4}
+\contentsline {paragraph}{Funciones de red:}{73}{section*.83}
+\contentsline {paragraph}{Publicacion del progreso:}{75}{section*.85}
+\contentsline {subsection}{\numberline {4.4.5}Autentificaci\IeC {\'o}n}{77}{subsection.4.4.5}
+\contentsline {subsection}{\numberline {4.4.6}Comunicaci\IeC {\'o}n entre actividades}{79}{subsection.4.4.6}
+\contentsline {chapter}{\numberline {5}Pruebas y resultados}{82}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusiones y l\IeC {\'\i }neas futuras}{83}{chapter.6}
+\contentsline {section}{\numberline {6.1}L\IeC {\'\i }neas futuras}{83}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Servidor Radius}{83}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Configuraci\IeC {\'o}n inicial}{84}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Base de datos}{84}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.4}Interfaz de Administraci\IeC {\'o}n}{84}{subsection.6.1.4}
+\contentsline {subsection}{\numberline {6.1.5}Bluetooth}{84}{subsection.6.1.5}
+\contentsline {subsection}{\numberline {6.1.6}Ultrasonidos + PIR}{84}{subsection.6.1.6}
+\contentsline {subsection}{\numberline {6.1.7}Doble autentificaci\IeC {\'o}n}{85}{subsection.6.1.7}
+\contentsline {subsection}{\numberline {6.1.8}Autorizaciones temporales}{85}{subsection.6.1.8}
+\contentsline {section}{\numberline {6.2}Conclusiones}{85}{section.6.2}
+\contentsline {chapter}{\numberline {7}Manual usuario}{86}{chapter.7}
